@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="favicon" width="32" height="32" style="border: 1px solid #ccc; image-rendering: pixelated; width: 320px; height: 320px;"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('favicon');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas with transparent background
+        ctx.clearRect(0, 0, 32, 32);
+        
+        // Set the main color (dark blue/black like your logo)
+        ctx.fillStyle = '#2c3e50';
+        
+        // Draw the "AROS" text area (simplified)
+        ctx.fillRect(2, 2, 28, 10);
+        
+        // Create the "T" shape (inspired by your logo)
+        // Horizontal bar of the T
+        ctx.fillRect(4, 14, 24, 6);
+        
+        // Vertical bar of the T
+        ctx.fillRect(13, 14, 6, 16);
+        
+        // Add some accent color (red like your website theme)
+        ctx.fillStyle = '#e74c3c';
+        
+        // Add small accent dots for gaming theme
+        ctx.fillRect(8, 4, 2, 2);
+        ctx.fillRect(14, 4, 2, 2);
+        ctx.fillRect(20, 4, 2, 2);
+        
+        // Convert canvas to ICO format data
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL('image/png');
+            console.log('Favicon created! Right-click the canvas and save as favicon.ico');
+        }, 100);
+    </script>
+</body>
+</html>

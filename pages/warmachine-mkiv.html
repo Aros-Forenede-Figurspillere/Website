@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warmachine MKIV | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Lær alt om Warmachine MKIV - det ultimative miniature wargame. Strategisk kamp med warjacks, warcasters og episke slag på slagmarken.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Main stylesheet for theme system -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    
+    <!-- Custom CSS for this page -->
+    <style>
+        .warmachine-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+                        url('../assets/images/warmachine/WM-Wed-Blog-Featured-2500x1400-V1_d5df7996-099e-4cb4-9406-c3c083fa7460.webp') center/cover;
+            color: var(--text-light);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .warmachine-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .warmachine-hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .faction-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+        
+        .faction-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-card h3 {
+            color: var(--primary-color);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faction-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .game-features {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
+            margin: 3rem 0;
+            border-radius: 12px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-item h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .rules-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 3rem 0;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .rules-section h2 {
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .rules-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .app-download-btn {
+            display: inline-block;
+            background: var(--text-light);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .app-download-btn:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .getting-started {
+            background: var(--bg-secondary);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+        
+        .starter-sets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .starter-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .starter-card h4 {
+            color: var(--primary-color);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .price-tag {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        
+        .join-section {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(45deg, var(--bg-secondary), var(--bg-primary));
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+        
+        .join-section h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .join-section p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .warmachine-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .warmachine-hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html">
+                    <img src="../assets/images/aros-logo.png" alt="Aros FF Logo" class="logo-img">
+                    Aros FF
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html#hjem" class="nav-link">Hjem</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#om-os" class="nav-link">Om Os</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#events" class="nav-link">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dice-game.html" class="nav-link">Terning Spil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="warmachine-mkiv.html" class="nav-link active">Warmachine MKIV</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#kontakt" class="nav-link">Kontakt</a>
+                </li>
+                <li class="nav-item theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Skift tema">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="warmachine-hero">
+        <div class="container">
+            <h1>WARMACHINE MKIV</h1>
+            <p class="subtitle">Steam • Steel • Spellcasting • Strategy</p>
+            <p>Det ultimative clash af metal og magi på slagmarken!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="intro-section">
+            <h2>Velkommen til Warmachine Universe</h2>
+            <p class="lead">
+                Warmachine er et award-winning miniature wargame sat i fantasy-verdenen Iron Kingdoms. 
+                Tag kontrol over krigere, beasts, maskiner og de mægtige battle-mages som kommanderer dem alle.
+            </p>
+            <p>
+                Den nye MKIV edition bringer friske regler, streamlined gameplay og en fri app med alle regler - 
+                perfekt for både nye spillere og veteraner.
+            </p>
+        </section>
+
+        <!-- Game Features -->
+        <section class="game-features">
+            <div class="container">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                    Hvad Gør Warmachine Unikt?
+                </h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-robot"></i>
+                        <h4>Warjacks & Warbeasts</h4>
+                        <p>Kommander mægtige steam-powered warjacks og mystiske warbeasts i episke kampe</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-magic"></i>
+                        <h4>Warcasters & Warlocks</h4>
+                        <p>Mægtige spellcasters som leder dine armies og kan ændre kampens gang</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chess"></i>
+                        <h4>Strategisk Dybde</h4>
+                        <p>Dybe taktiske muligheder med resource management og positioning</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Gratis App</h4>
+                        <p>Alle regler og stats gratis i Warmachine appen - ingen dyre rulebooks!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Factions -->
+        <section class="factions-section">
+            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                Vælg Din Faction
+            </h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                Hver faction har sin unikke playstyle, lore og æstetik. Hvilket army kalder til dig?
+            </p>
+            
+            <div class="faction-grid">
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-cygnar.webp" alt="Cygnar Storm Legion">
+                    <h3>Cygnar Storm Legion</h3>
+                    <p>
+                        Den teknologisk avancerede nation Cygnar kombinerer lightning-powered warjacks 
+                        med elite soldiers. Perfekt for spillere der elsker electrical warfare og ranged attacks.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-khador.webp" alt="Khador Winter Korps">
+                    <h3>Khador Winter Korps</h3>
+                    <p>
+                        Det brutale nordlige imperium med massive warjacks og tough infantry. 
+                        For spillere der foretrækker heavy armor og overwhelming firepower.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/Cryx-Necrofactorium-min.webp" alt="Cryx Necrofactorium">
+                    <h3>Cryx Necrofactorium</h3>
+                    <p>
+                        Undead pirates med necromantic warjacks og thrall armies. 
+                        Perfekt for spillere der elsker swarm tactics og dark magic.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-khymaera.webp" alt="Khymaera Shadowflame Shard">
+                    <h3>Khymaera Shadowflame Shard</h3>
+                    <p>
+                        Mystiske dragon-spawn med shadow magic og flying units. 
+                        For spillere der vil have unique aesthetics og mobility-baseret warfare.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-Orgoth.webp" alt="Orgoth Sea Raiders">
+                    <h3>Orgoth Sea Raiders</h3>
+                    <p>
+                        Ancient conquerors med eldritch magic og terrifying warjacks. 
+                        Perfekt for spillere der elsker horror aesthetics og control gameplay.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-southernkriels.webp" alt="Southern Kriels">
+                    <h3>Southern Kriels Brineblood Marauders</h3>
+                    <p>
+                        Savage tribal warriors med amphibious units og primitive but effective technology. 
+                        For spillere der vil have aggressive, in-your-face combat.
+                    </p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules & App Section -->
+        <section class="rules-section">
+            <div class="container">
+                <h2>Alle Regler - Helt Gratis!</h2>
+                <p>
+                    I modsætning til andre wargames behøver du ikke købe dyre rulebooks. 
+                    Warmachine appen indeholder alle regler og model stats - opdateret hver onsdag!
+                </p>
+                <a href="https://steamforged.com/en-eu/pages/warmachine-app" class="app-download-btn" target="_blank">
+                    <i class="fas fa-download"></i> Download Warmachine App
+                </a>
+                <a href="https://steamforged.com/warmachine" class="app-download-btn" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Officiel Steamforged Side
+                </a>
+            </div>
+        </section>
+
+        <!-- Getting Started -->
+        <section class="getting-started">
+            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                Kom I Gang Med Warmachine
+            </h2>
+            <p style="text-align: center; color: var(--text-secondary);">
+                Du behøver ikke meget for at starte din Warmachine rejse!
+            </p>
+            
+            <div class="starter-sets">
+                <div class="starter-card">
+                    <img src="../assets/images/warmachine/Warmachine-Shadows_Scum-ProductShot-2000x2000-Box2.webp" 
+                         alt="Shadows & Scum Two-Player Set" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4>Shadows & Scum Two-Player Set</h4>
+                    <p>Perfekt startpunkt med to komplette armies: Khymaera Shadowflame Shard og Southern Kriels.</p>
+                    <div class="price-tag">€89,99</div>
+                    <p><strong>Indeholder:</strong> 2 armies, regler, dice, templates og alt hvad I skal bruge!</p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="starter-card">
+                    <img src="../assets/images/warmachine/slideshow-warmachine-dusk.webp" 
+                         alt="Dusk House Kallyss" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4>Core Expansion Sets</h4>
+                    <p>Udbyg din faction med Core Expansion packs der indeholder warcaster, warjacks og units.</p>
+                    <div class="price-tag">€134,99</div>
+                    <p><strong>Factions:</strong> Cygnar, Cryx, Khador, Dusk House og flere kommer snart!</p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+                
+                <div class="starter-card">
+                    <img src="../assets/images/warmachine/warmachine-app-15.webp" 
+                         alt="Warmachine App" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4>Gratis Warmachine App</h4>
+                    <p>Download appen og få alle regler, army lists og model stats helt gratis!</p>
+                    <div class="price-tag">GRATIS</div>
+                    <p><strong>Indeholder:</strong> Komplet regelsæt, alle army cards og ugentlige opdateringer!</p>
+                    <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Content Section -->
+        <section class="game-features">
+            <div class="container">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                    Nyheder & Opdateringer
+                </h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="../assets/images/warmachine/WM_Featured_Image_Frozen_and_Forgotten.webp" 
+                             alt="Frozen & Forgotten" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4>Frozen & Forgotten</h4>
+                        <p>En ny to-spiller journey med to forces på jagt efter hævn. Coming soon!</p>
+                        <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                    </div>
+                    <div class="feature-item">
+                        <img src="../assets/images/warmachine/WM-Blog-1200x857-KeyArt-OldUmbrey.webp" 
+                             alt="Khador Old Umbrey" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4>Khador Old Umbrey</h4>
+                        <p>Udforsk de nye Old Umbrey forces fra Khador med unikke units og tactics.</p>
+                        <small style="color: var(--text-secondary); font-style: italic;">Image courtesy of Steamforged Games</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Section -->
+        <section class="join-section">
+            <h2>Slut Dig Til Aros FF's Warmachine Community!</h2>
+            <p>
+                Vi har en stærk og voksende Warmachine community med regelmæssige spil, 
+                turnering og painting sessions. Uanset om du er nybegynder eller veteran, 
+                er der altid nogen at spille med!
+            </p>
+            <a href="../index.html#kontakt" class="cta-button">
+                Kontakt Os For Mere Info
+            </a>
+        </section>
+
+        <!-- What We Offer -->
+        <section class="game-features">
+            <div class="container">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                    Hvad Tilbyder Vi?
+                </h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Regelmæssige Spil</h4>
+                        <p>Warmachine aftener hver uge med casual og competitive play</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Begynder Kurser</h4>
+                        <p>Lær spillet med erfarne spillere som guides</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-trophy"></i>
+                        <h4>Turneringer</h4>
+                        <p>Lokale turneringer og deltagelse i nationale events</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Painting Workshops</h4>
+                        <p>Lær at male dine models med tips fra erfarne hobbyister</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Aros Forenede Figurspillere</h4>
+                    <p>Aarhus' førende forening for tabletop wargaming. Slut dig til vores community og oplev fantastiske spil, fællesskab og konkurrence.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Spil Vi Spiller</h4>
+                    <ul>
+                        <li>Warmachine MKIV</li>
+                        <li>Warhammer 40k</li>
+                        <li>Moonstone</li>
+                        <li>Age of Sigmar</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html#hjem">Hjem</a></li>
+                        <li><a href="../index.html#om-os">Om Os</a></li>
+                        <li><a href="../index.html#events">Events</a></li>
+                        <li><a href="../index.html#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Følg Os</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/arosforenedefigurspillere" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aros Forenede Figurspillere. Alle rettigheder forbeholdes.</p>
+                <p style="font-size: 0.8rem; opacity: 0.7;">
+                    Warmachine images downloaded from and courtesy of Steamforged Games (steamforged.com). 
+                    Warmachine is a trademark of Steamforged Games Limited. Used for promotional/community purposes.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Side ikke fundet | Aros Forenede Figurspillere</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .error-code {
+            font-family: 'Cinzel', serif;
+            font-size: 8rem;
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .error-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #bdc3c7;
+        }
+        
+        .dice-icon {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin: 1rem 0;
+            animation: roll 2s infinite ease-in-out;
+        }
+        
+        @keyframes roll {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #e74c3c;
+        }
+        
+        .btn-secondary:hover {
+            background: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="dice-icon">
+            <i class="fas fa-dice-d20"></i>
+        </div>
+        <h1 class="error-title">Siden blev ikke fundet!</h1>
+        <p class="error-message">
+            Ups! Det ser ud til, at du har slået en kritisk fejl. 
+            Den side, du leder efter, eksisterer ikke eller er blevet flyttet.
+            <br><br>
+            Måske skulle du rulle igen? 🎲
+        </p>
+        
+        <div class="error-actions">
+            <a href="/" class="btn">Tilbage til Hjemmeside</a>
+            <a href="/#kontakt" class="btn btn-secondary">Kontakt Os</a>
+        </div>
+    </div>
+</body>
+</html>

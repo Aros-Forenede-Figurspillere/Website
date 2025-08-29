@@ -1,0 +1,126 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Aros Forenede Figurspillere",
+  "alternateName": "Aros FF",
+  "description": "Aarhus' forening for tabletop wargaming spillere. Vi spiller Warhammer, Warhammer 40k, Moonstone, Warmachine og mange andre fantastiske spil.",
+  "url": "https://aros-forenede-figurspillere.github.io/Website/",
+  "logo": "https://aros-forenede-figurspillere.github.io/Website/images/aros-logo.png",
+  "image": "https://aros-forenede-figurspillere.github.io/Website/images/clubhouse.jpg",
+  "foundingDate": "2020",
+  "email": "info@arosff.dk",
+  "sameAs": [
+    "https://www.facebook.com/arosforenedefigurspillere"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Aarhus",
+    "addressCountry": "DK"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "56.1629",
+    "longitude": "10.2039"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Aarhus",
+    "addressCountry": "DK"
+  },
+  "knowsAbout": [
+    "Tabletop Gaming",
+    "Warhammer",
+    "Warhammer 40k",
+    "Moonstone",
+    "Warmachine",
+    "Miniature Gaming",
+    "Strategy Games",
+    "Board Games"
+  ],
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Danish Gaming Community"
+  },
+  "event": [
+    {
+      "@type": "Event",
+      "name": "Månedlig Turnering",
+      "description": "Månedlige turneringer i forskellige spilsystemer",
+      "eventSchedule": {
+        "@type": "Schedule",
+        "repeatFrequency": "P1M",
+        "byDay": "Sunday"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Aros Gaming Center",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Aarhus",
+          "addressCountry": "DK"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Aros Forenede Figurspillere"
+      }
+    },
+    {
+      "@type": "Event",
+      "name": "Begynder Workshop",
+      "description": "Workshop for nye spillere",
+      "eventSchedule": {
+        "@type": "Schedule",
+        "repeatFrequency": "P1M"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Klubhuset",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Aarhus",
+          "addressCountry": "DK"
+        }
+      }
+    }
+  ],
+  "openingHours": "Su 13:00-18:00",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Gaming Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Tabletop Gaming Sessions",
+          "description": "Regular gaming sessions for various tabletop games"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Tournaments",
+          "description": "Organized tournaments for different game systems"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Beginner Workshops",
+          "description": "Training and workshops for new players"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Painting Workshops",
+          "description": "Miniature painting techniques and workshops"
+        }
+      }
+    ]
+  }
+}

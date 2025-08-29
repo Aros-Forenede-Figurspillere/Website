@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer for Aros Logo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .upload-area {
+            border: 2px dashed #e74c3c;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background: #f8f9fa;
+            border-color: #c0392b;
+        }
+        
+        .upload-area.dragover {
+            background: #e8f4fd;
+            border-color: #3498db;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .preview-container {
+            display: none;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        
+        .controls {
+            display: none;
+            margin: 20px 0;
+        }
+        
+        .control-group {
+            margin: 15px 0;
+        }
+        
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input[type="range"], input[type="number"] {
+            width: 200px;
+            margin: 0 10px;
+        }
+        
+        button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #c0392b;
+        }
+        
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .size-presets {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .preset-btn {
+            background: #3498db;
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+        
+        .preset-btn:hover {
+            background: #2980b9;
+        }
+        
+        .info {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        
+        .canvas-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        #resizeCanvas {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Aros Logo Resizer</h1>
+        <p style="text-align: center; color: #7f8c8d;">Resize your logo to the perfect dimensions for your website</p>
+        
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <i style="font-size: 48px; color: #e74c3c;">📁</i>
+            <h3>Click to Upload Your Logo</h3>
+            <p>Or drag and drop your image file here</p>
+            <p style="font-size: 12px; color: #7f8c8d;">Supports: PNG, JPG, JPEG, SVG</p>
+        </div>
+        
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <div class="preview-container" id="previewContainer">
+            <h3>Original Image</h3>
+            <img id="originalImage" class="preview-image" alt="Original">
+            <div id="originalDimensions"></div>
+        </div>
+        
+        <div class="controls" id="controls">
+            <h3>Resize Options</h3>
+            
+            <div class="info">
+                <strong>Recommended sizes for your website:</strong><br>
+                • Navigation logo: 200x100px or 150x150px<br>
+                • Favicon: 32x32px, 180x180px<br>
+                • Social media: 400x400px
+            </div>
+            
+            <div class="size-presets">
+                <button class="preset-btn" onclick="setSize(200, 100)">Logo 200x100</button>
+                <button class="preset-btn" onclick="setSize(150, 150)">Logo 150x150</button>
+                <button class="preset-btn" onclick="setSize(32, 32)">Favicon 32x32</button>
+                <button class="preset-btn" onclick="setSize(180, 180)">iOS Icon 180x180</button>
+                <button class="preset-btn" onclick="setSize(400, 400)">Social 400x400</button>
+            </div>
+            
+            <div class="control-group">
+                <label>Width:</label>
+                <input type="number" id="widthInput" min="1" max="2000" value="200">
+                <span>px</span>
+            </div>
+            
+            <div class="control-group">
+                <label>Height:</label>
+                <input type="number" id="heightInput" min="1" max="2000" value="100">
+                <span>px</span>
+            </div>
+            
+            <div class="control-group">
+                <label>
+                    <input type="checkbox" id="maintainRatio" checked> Maintain aspect ratio
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <label>Quality:</label>
+                <input type="range" id="qualitySlider" min="0.1" max="1" step="0.1" value="0.9">
+                <span id="qualityValue">90%</span>
+            </div>
+            
+            <button onclick="resizeImage()">🔄 Resize Image</button>
+            <button onclick="resetImage()">↺ Reset</button>
+        </div>
+        
+        <div class="canvas-container" id="canvasContainer" style="display: none;">
+            <h3>Resized Image</h3>
+            <canvas id="resizeCanvas"></canvas>
+            <div id="newDimensions"></div>
+            <br>
+            <button onclick="downloadImage()">⬇️ Download Resized Image</button>
+        </div>
+    </div>
+
+    <script>
+        let originalImage = null;
+        let aspectRatio = 1;
+        
+        // File input handling
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+        
+        // Drag and drop handling
+        const uploadArea = document.querySelector('.upload-area');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+        
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('originalImage');
+                img.src = e.target.result;
+                img.onload = function() {
+                    originalImage = img;
+                    aspectRatio = img.naturalWidth / img.naturalHeight;
+                    
+                    document.getElementById('previewContainer').style.display = 'block';
+                    document.getElementById('controls').style.display = 'block';
+                    
+                    document.getElementById('originalDimensions').textContent = 
+                        `Original size: ${img.naturalWidth}x${img.naturalHeight}px`;
+                    
+                    // Set initial values
+                    document.getElementById('widthInput').value = Math.min(200, img.naturalWidth);
+                    updateHeight();
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Maintain aspect ratio
+        document.getElementById('widthInput').addEventListener('input', updateHeight);
+        document.getElementById('heightInput').addEventListener('input', updateWidth);
+        document.getElementById('qualitySlider').addEventListener('input', function() {
+            document.getElementById('qualityValue').textContent = Math.round(this.value * 100) + '%';
+        });
+        
+        function updateHeight() {
+            if (document.getElementById('maintainRatio').checked && originalImage) {
+                const width = parseInt(document.getElementById('widthInput').value);
+                const height = Math.round(width / aspectRatio);
+                document.getElementById('heightInput').value = height;
+            }
+        }
+        
+        function updateWidth() {
+            if (document.getElementById('maintainRatio').checked && originalImage) {
+                const height = parseInt(document.getElementById('heightInput').value);
+                const width = Math.round(height * aspectRatio);
+                document.getElementById('widthInput').value = width;
+            }
+        }
+        
+        function setSize(width, height) {
+            document.getElementById('widthInput').value = width;
+            document.getElementById('heightInput').value = height;
+        }
+        
+        function resizeImage() {
+            if (!originalImage) return;
+            
+            const width = parseInt(document.getElementById('widthInput').value);
+            const height = parseInt(document.getElementById('heightInput').value);
+            const quality = parseFloat(document.getElementById('qualitySlider').value);
+            
+            const canvas = document.getElementById('resizeCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Clear canvas with transparent background
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw resized image
+            ctx.drawImage(originalImage, 0, 0, width, height);
+            
+            document.getElementById('canvasContainer').style.display = 'block';
+            document.getElementById('newDimensions').textContent = 
+                `New size: ${width}x${height}px`;
+        }
+        
+        function downloadImage() {
+            const canvas = document.getElementById('resizeCanvas');
+            const quality = parseFloat(document.getElementById('qualitySlider').value);
+            
+            // Create download link
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'aros-logo-resized.png';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 'image/png', quality);
+        }
+        
+        function resetImage() {
+            if (originalImage) {
+                document.getElementById('widthInput').value = Math.min(200, originalImage.naturalWidth);
+                updateHeight();
+                document.getElementById('canvasContainer').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terning Spil | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Spil vores sjove terning spil! Perfekt for tabletop gaming entusiaster fra Aros Forenede Figurspillere.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Main stylesheet for theme system -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    
+    <style>
+        /* Dice Game Specific Styles with Theme Support */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--hero-bg, linear-gradient(135deg, #2c3e50 0%, #3498db 100%));
+            color: var(--hero-text, white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logo h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e74c3c;
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #bdc3c7;
+        }
+
+        /* Dice Container */
+        .dice-container {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .dice {
+            width: 120px;
+            height: 120px;
+            background: #ecf0f1;
+            border-radius: 15px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: #2c3e50;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border: 3px solid #34495e;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dice:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .dice.rolling {
+            animation: roll 1s ease-in-out;
+            cursor: not-allowed;
+        }
+
+        @keyframes roll {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Dice faces using dots */
+        .dice-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            padding: 15px;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: #2c3e50;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        /* Game Controls */
+        .controls {
+            margin: 2rem 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #e74c3c;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #e74c3c;
+        }
+
+        /* Game Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(52, 73, 94, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            font-family: 'Cinzel', serif;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-top: 0.5rem;
+        }
+
+        /* Game History */
+        .history {
+            margin-top: 2rem;
+        }
+
+        .history-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ecf0f1;
+        }
+
+        .history-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Challenge Mode */
+        .challenge {
+            background: rgba(39, 174, 96, 0.2);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .challenge-title {
+            font-size: 1.3rem;
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .challenge-text {
+            color: #ecf0f1;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .dice {
+                width: 100px;
+                height: 100px;
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+                margin: 5px;
+            }
+
+            .dice {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .dice-dots {
+                padding: 10px;
+                gap: 5px;
+            }
+
+            .dot {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🎲 Aros Terning Spil</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Tilbage til Hjemmeside</a>
+                <a href="../index.html#kontakt" class="nav-link">Kontakt</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun icon sun-icon"></i>
+                    <i class="fas fa-moon icon moon-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="game-container">
+            <h1>Terning Spil</h1>
+            <p class="game-subtitle">Kast terningen og test dit held!</p>
+
+            <!-- Dice -->
+            <div class="dice-container">
+                <div class="dice" id="dice" onclick="rollDice()">
+                    <div class="dice-dots" id="diceDots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn" id="rollBtn" onclick="rollDice()">
+                    <i class="fas fa-dice"></i> Kast Terning
+                </button>
+                <button class="btn btn-secondary" onclick="resetGame()">
+                    <i class="fas fa-redo"></i> Nulstil
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRolls">0</div>
+                    <div class="stat-label">Samlede Kast</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="lastRoll">-</div>
+                    <div class="stat-label">Sidste Kast</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="highestRoll">-</div>
+                    <div class="stat-label">Højeste Kast</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="averageRoll">-</div>
+                    <div class="stat-label">Gennemsnit</div>
+                </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="challenge" id="challenge" style="display: none;">
+                <div class="challenge-title">🏆 Udfordring Gennemført!</div>
+                <div class="challenge-text" id="challengeText"></div>
+            </div>
+
+            <!-- History -->
+            <div class="history">
+                <div class="history-title">Kasnings Historie</div>
+                <div class="history-list" id="historyList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Small Credits Footer -->
+    <footer style="background: rgba(44, 62, 80, 0.9); padding: 1rem; text-align: center; color: #bdc3c7; font-size: 0.8rem;">
+        <p>
+            🎲 Terning Spil skabt af <strong>Aros Forenede Figurspillere</strong> i samarbejde med <strong>GitHub Copilot</strong> (August 2025)
+            <br>
+            <a href="../index.html" style="color: #e74c3c; text-decoration: none;">← Tilbage til Hjemmeside</a>
+        </p>
+    </footer>
+
+    <script>
+        class DiceGame {
+            constructor() {
+                this.rolls = [];
+                this.isRolling = false;
+                this.challenges = [
+                    { condition: (rolls) => rolls.length >= 10, text: "10 kast gennemført!" },
+                    { condition: (rolls) => rolls.includes(6), text: "Du kastede en 6!" },
+                    { condition: (rolls) => rolls.filter(r => r === 6).length >= 3, text: "3 seksere kastet!" },
+                    { condition: (rolls) => this.hasSequence(rolls, [1,2,3,4,5,6]), text: "Fuld sekvens 1-6!" },
+                    { condition: (rolls) => rolls.length >= 20, text: "Dedikeret spiller - 20 kast!" },
+                    { condition: (rolls) => rolls.slice(-5).every(r => r >= 4), text: "5 høje kast i træk!" }
+                ];
+                this.completedChallenges = new Set();
+                this.initDice();
+            }
+
+            initDice() {
+                this.showDiceFace(1);
+            }
+
+            showDiceFace(number) {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                const patterns = {
+                    1: [4], // center
+                    2: [0, 8], // top-left, bottom-right
+                    3: [0, 4, 8], // diagonal
+                    4: [0, 2, 6, 8], // corners
+                    5: [0, 2, 4, 6, 8], // corners + center
+                    6: [0, 1, 2, 6, 7, 8] // two columns
+                };
+
+                if (patterns[number]) {
+                    patterns[number].forEach(index => {
+                        dots[index].classList.add('active');
+                    });
+                }
+            }
+
+            rollDice() {
+                if (this.isRolling) return;
+
+                this.isRolling = true;
+                const dice = document.getElementById('dice');
+                const rollBtn = document.getElementById('rollBtn');
+                
+                dice.classList.add('rolling');
+                rollBtn.disabled = true;
+
+                // Animate through random numbers
+                let animationSteps = 0;
+                const maxSteps = 10;
+                const animationInterval = setInterval(() => {
+                    const randomNum = Math.floor(Math.random() * 6) + 1;
+                    this.showDiceFace(randomNum);
+                    
+                    animationSteps++;
+                    if (animationSteps >= maxSteps) {
+                        clearInterval(animationInterval);
+                        
+                        // Final result
+                        const finalRoll = Math.floor(Math.random() * 6) + 1;
+                        setTimeout(() => {
+                            this.showDiceFace(finalRoll);
+                            this.addRoll(finalRoll);
+                            this.isRolling = false;
+                            dice.classList.remove('rolling');
+                            rollBtn.disabled = false;
+                        }, 200);
+                    }
+                }, 100);
+            }
+
+            addRoll(number) {
+                this.rolls.push(number);
+                this.updateStats();
+                this.updateHistory();
+                this.checkChallenges();
+            }
+
+            updateStats() {
+                document.getElementById('totalRolls').textContent = this.rolls.length;
+                document.getElementById('lastRoll').textContent = this.rolls[this.rolls.length - 1] || '-';
+                document.getElementById('highestRoll').textContent = this.rolls.length ? Math.max(...this.rolls) : '-';
+                
+                if (this.rolls.length > 0) {
+                    const average = this.rolls.reduce((a, b) => a + b, 0) / this.rolls.length;
+                    document.getElementById('averageRoll').textContent = average.toFixed(1);
+                }
+            }
+
+            updateHistory() {
+                const historyList = document.getElementById('historyList');
+                historyList.innerHTML = '';
+                
+                // Show last 15 rolls
+                const recentRolls = this.rolls.slice(-15);
+                recentRolls.forEach(roll => {
+                    const item = document.createElement('div');
+                    item.className = 'history-item';
+                    item.textContent = roll;
+                    historyList.appendChild(item);
+                });
+            }
+
+            checkChallenges() {
+                this.challenges.forEach((challenge, index) => {
+                    if (!this.completedChallenges.has(index) && challenge.condition(this.rolls)) {
+                        this.completedChallenges.add(index);
+                        this.showChallenge(challenge.text);
+                    }
+                });
+            }
+
+            showChallenge(text) {
+                const challengeDiv = document.getElementById('challenge');
+                const challengeText = document.getElementById('challengeText');
+                
+                challengeText.textContent = text;
+                challengeDiv.style.display = 'block';
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    challengeDiv.style.display = 'none';
+                }, 5000);
+            }
+
+            hasSequence(arr, sequence) {
+                for (let i = 0; i <= arr.length - sequence.length; i++) {
+                    if (sequence.every((val, index) => arr[i + index] === val)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            reset() {
+                this.rolls = [];
+                this.completedChallenges.clear();
+                this.updateStats();
+                this.updateHistory();
+                this.showDiceFace(1);
+                document.getElementById('challenge').style.display = 'none';
+            }
+        }
+
+        // Initialize game
+        const game = new DiceGame();
+
+        // Global functions for HTML onclick
+        function rollDice() {
+            game.rollDice();
+        }
+
+        function resetGame() {
+            if (confirm('Er du sikker på, at du vil nulstille alle statistikker?')) {
+                game.reset();
+            }
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.key === 'Enter') {
+                e.preventDefault();
+                rollDice();
+            } else if (e.key === 'r' || e.key === 'R') {
+                resetGame();
+            }
+        });
+
+        // Add sound effects (optional)
+        function playSound(type) {
+            // You can add sound effects here
+            // const audio = new Audio(`sounds/${type}.mp3`);
+            // audio.play().catch(() => {}); // Ignore errors if no sound files
+        }
+
+        // Fun Easter eggs
+        document.addEventListener('dblclick', () => {
+            document.body.style.filter = 'hue-rotate(45deg)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 1000);
+        });
+
+        // Welcome message
+        console.log('🎲 Velkommen til Aros Terning Spil! 🎲');
+        console.log('Brug mellemrumstasten eller Enter til at kaste terningen!');
+        console.log('Tryk R for at nulstille spillet.');
+    </script>
+    
+    <!-- Theme Management -->
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

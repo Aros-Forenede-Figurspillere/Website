@@ -1,0 +1,47 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the entire site
+# Sitemap location
+Sitemap: https://aros-forenede-figurspillere.github.io/Website/sitemap.xml
+
+# Crawl delay (optional - be nice to servers)
+Crawl-delay: 1
+
+# Disallow sensitive or unnecessary files
+Disallow: /favicon-generator.html
+Disallow: /create-favicon.html
+Disallow: /favicon-base64.txt
+Disallow: /*.md$
+
+# Allow important pages
+Allow: /index.html
+Allow: /images/
+Allow: /styles.css
+Allow: /script.js
+
+# Common bot user agents - all allowed
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Archive bots
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Wayback
+Allow: /
