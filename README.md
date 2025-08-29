@@ -92,8 +92,7 @@ We foster a welcoming environment where both newcomers and veterans can:
 │   │   ├── clubhouse.jpg     # Community photos
 │   │   ├── warhammer40k/     # Warhammer 40k assets
 │   │   └── warmachine/       # Warmachine assets
-│   └── icons/                # Favicons and app icons
-│       └── favicon.svg       # SVG favicon source
+├── favicon.ico               # Website favicon
 ├── includes/                  # Reusable HTML components
 │   ├── head-common.html      # Common head elements
 │   ├── head-subpages.html    # Subpage head elements

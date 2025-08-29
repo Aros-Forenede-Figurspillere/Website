@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Community Navigation**: Dedicated community dropdown in navigation menu
 - **Enhanced Social Links**: Updated all social media references across the site
 
+#### Changed
+- **Favicon Update**: Switched from SVG to ICO format for better browser compatibility
+- **Favicon Location**: Moved favicon from `assets/icons/` to root directory for standard web conventions
+- **Manifest Update**: Updated PWA manifest to reference new favicon location
+
 #### Community Features
 - Prominent Discord and Facebook buttons in contact section
 - Community value proposition clearly explained (Discord = daily chat, Facebook = events)
@@ -31,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated structured data (JSON-LD) to include Discord server
 - Enhanced social link management across multiple components
 - Improved accessibility with proper link titles and descriptions
+- Favicon references updated in all HTML components and manifest
 
 ---
 

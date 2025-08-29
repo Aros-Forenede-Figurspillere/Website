@@ -323,7 +323,7 @@ The website includes PWA manifest (`site.webmanifest`):
   "theme_color": "#e74c3c",
   "icons": [
     {
-      "src": "assets/icons/favicon.svg",
+      "src": "favicon.ico",
       "sizes": "any",
       "type": "image/svg+xml"
     }
