@@ -1,18 +1,25 @@
 // Theme Management System
 class ThemeManager {
     constructor() {
+        console.log('🎨 ThemeManager: Initializing...');
         this.theme = this.getStoredTheme() || this.getSystemTheme();
+        console.log(`🎨 ThemeManager: Initial theme set to "${this.theme}"`);
         this.init();
     }
 
     init() {
+        console.log('🎨 ThemeManager: Setting up theme system...');
+        
         // Apply initial theme
         this.applyTheme(this.theme);
         
         // Set up theme toggle button
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
+            console.log('🎨 ThemeManager: Theme toggle button found, adding click listener');
             themeToggle.addEventListener('click', () => this.toggleTheme());
+        } else {
+            console.warn('🎨 ThemeManager: Theme toggle button NOT found! Check if element with id="themeToggle" exists');
         }
         
         // Listen for system theme changes
@@ -20,24 +27,28 @@ class ThemeManager {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
                 if (!this.getStoredTheme()) {
                     this.theme = e.matches ? 'dark' : 'light';
+                    console.log(`🎨 ThemeManager: System theme changed to "${this.theme}"`);
                     this.applyTheme(this.theme);
                 }
             });
         }
+        
+        console.log('🎨 ThemeManager: Initialization complete!');
     }
 
     getSystemTheme() {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-        return 'light';
+        const systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        console.log(`🎨 ThemeManager: System theme detected as "${systemTheme}"`);
+        return systemTheme;
     }
 
     getStoredTheme() {
         try {
-            return localStorage.getItem('theme');
+            const stored = localStorage.getItem('theme');
+            console.log(`🎨 ThemeManager: Stored theme is "${stored}"`);
+            return stored;
         } catch (e) {
-            console.warn('localStorage not available for theme storage');
+            console.warn('🎨 ThemeManager: localStorage not available for theme storage');
             return null;
         }
     }
@@ -56,12 +67,15 @@ class ThemeManager {
     }
 
     applyTheme(theme) {
+        console.log(`🎨 ThemeManager: Applying theme "${theme}"`);
         const root = document.documentElement;
         
         if (theme === 'dark') {
             root.setAttribute('data-theme', 'dark');
+            console.log('🎨 ThemeManager: Set data-theme="dark" on document root');
         } else {
             root.removeAttribute('data-theme');
+            console.log('🎨 ThemeManager: Removed data-theme attribute (light mode)');
         }
         
         // Update meta theme-color for mobile browsers
@@ -85,17 +99,23 @@ class ThemeManager {
     }
 
     toggleTheme() {
+        const oldTheme = this.theme;
         this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        console.log(`🎨 ThemeManager: Toggling theme from "${oldTheme}" to "${this.theme}"`);
+        
         this.applyTheme(this.theme);
         this.storeTheme(this.theme);
         
         // Add a subtle animation feedback
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
+            console.log('🎨 ThemeManager: Adding toggle animation');
             themeToggle.style.transform = 'scale(0.9)';
             setTimeout(() => {
                 themeToggle.style.transform = '';
             }, 150);
+        } else {
+            console.warn('🎨 ThemeManager: Could not find theme toggle button for animation');
         }
     }
 
@@ -596,6 +616,20 @@ function safeQuerySelectorAll(selector) {
         return [];
     }
 }
+
+// Initialize theme manager when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🎨 DOM loaded, initializing ThemeManager...');
+    window.themeManager = new ThemeManager();
+    
+    // Also check if the toggle button exists
+    const toggleButton = document.getElementById('themeToggle');
+    console.log('🎨 Theme toggle button check:', toggleButton ? 'FOUND' : 'NOT FOUND');
+    if (toggleButton) {
+        console.log('🎨 Button element:', toggleButton);
+        console.log('🎨 Button classes:', toggleButton.className);
+    }
+});
 
 // Console greeting message
 console.log(`

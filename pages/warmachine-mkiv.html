@@ -143,8 +143,9 @@
         
         .app-download-btn {
             display: inline-block;
-            background: var(--text-light);
-            color: var(--primary-color);
+            background: var(--bg-card);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
             padding: 12px 30px;
             border-radius: 8px;
             text-decoration: none;
@@ -154,9 +155,10 @@
         }
         
         .app-download-btn:hover {
-            background: var(--bg-light);
+            background: var(--color-primary);
+            color: var(--text-inverse);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-medium);
         }
         
         .getting-started {
@@ -266,8 +268,9 @@
                     <a href="../index.html#kontakt" class="nav-link">Kontakt</a>
                 </li>
                 <li class="nav-item theme-toggle-container">
-                    <button id="themeToggle" class="theme-toggle" aria-label="Skift tema">
-                        <i class="fas fa-sun"></i>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun icon sun-icon"></i>
+                        <i class="fas fa-moon icon moon-icon"></i>
                     </button>
                 </li>
             </ul>
