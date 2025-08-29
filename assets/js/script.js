@@ -1,3 +1,313 @@
+// Loading Screen Management
+class LoadingManager {
+    constructor() {
+        this.loadingScreen = document.getElementById('loading-screen');
+        this.loadingText = document.querySelector('.loading-text');
+        this.resourcesLoaded = {
+            dom: false,
+            components: false,
+            styles: false,
+            images: false,
+            fonts: false
+        };
+        this.totalResources = Object.keys(this.resourcesLoaded).length;
+        this.loadedCount = 0;
+        this.minimumDisplayTime = 1500; // Minimum time to show loading screen
+        this.maxDisplayTime = 5000; // Maximum time to show loading screen (failsafe)
+        this.startTime = Date.now();
+        this.componentsToLoad = ['head-container', 'navigation-container', 'footer-container', 'scripts-container'];
+        this.componentsLoaded = [];
+        
+        this.init();
+    }
+    
+    init() {
+        console.log('🔄 LoadingManager: Initializing...');
+        
+        // Set up a global reference for other scripts to use
+        window.loadingManager = this;
+        
+        // Start monitoring resources
+        this.monitorDOMReady();
+        this.monitorComponents();
+        this.updateLoadingText();
+        
+        // Failsafe: Hide loading screen after maximum time
+        setTimeout(() => {
+            if (this.loadingScreen && !this.loadingScreen.classList.contains('hidden')) {
+                console.warn('🔄 LoadingManager: Failsafe triggered - hiding loading screen after max time');
+                this.hideLoadingScreen();
+            }
+        }, this.maxDisplayTime);
+    }
+    
+    monitorDOMReady() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.markResourceLoaded('dom', 'DOM indlæst');
+                this.delayedResourceMonitoring();
+            });
+        } else {
+            this.markResourceLoaded('dom', 'DOM indlæst');
+            this.delayedResourceMonitoring();
+        }
+    }
+    
+    delayedResourceMonitoring() {
+        // Wait a bit for dynamic components to be loaded before monitoring other resources
+        setTimeout(() => {
+            this.monitorStylesheets();
+            this.monitorImages();
+            this.monitorFonts();
+        }, 500);
+    }
+    
+    monitorComponents() {
+        // Check if components are loaded by observing when their containers get content
+        let checkCount = 0;
+        const maxChecks = 30; // Stop checking after 3 seconds (30 * 100ms)
+        
+        const checkComponents = () => {
+            checkCount++;
+            
+            this.componentsToLoad.forEach(containerId => {
+                if (!this.componentsLoaded.includes(containerId)) {
+                    const container = document.getElementById(containerId);
+                    if (container && container.innerHTML.trim() !== '') {
+                        this.componentsLoaded.push(containerId);
+                        console.log(`🔄 LoadingManager: Component ${containerId} loaded`);
+                    }
+                }
+            });
+            
+            if (this.componentsLoaded.length >= this.componentsToLoad.length || checkCount >= maxChecks) {
+                this.markResourceLoaded('components', 'Komponenter indlæst');
+                // After components are loaded, re-monitor resources that might have been added dynamically
+                setTimeout(() => {
+                    this.monitorStylesheets();
+                    this.monitorImages();
+                    this.monitorFonts();
+                }, 200);
+            } else {
+                setTimeout(checkComponents, 100);
+            }
+        };
+        
+        setTimeout(checkComponents, 200);
+    }
+    
+    monitorStylesheets() {
+        // Skip monitoring external stylesheets that might be slow to load
+        const localStylesheets = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+            .filter(link => !link.href.includes('googleapis.com') && !link.href.includes('cdnjs.cloudflare.com'));
+            
+        if (localStylesheets.length === 0) {
+            this.markResourceLoaded('styles', 'Styles indlæst');
+            return;
+        }
+        
+        let loadedStylesheets = 0;
+        const totalStylesheets = localStylesheets.length;
+        
+        localStylesheets.forEach(link => {
+            if (link.sheet || link.disabled) {
+                loadedStylesheets++;
+            } else {
+                const handleLoad = () => {
+                    loadedStylesheets++;
+                    if (loadedStylesheets >= totalStylesheets) {
+                        this.markResourceLoaded('styles', 'Styles indlæst');
+                    }
+                };
+                
+                link.addEventListener('load', handleLoad, { once: true });
+                link.addEventListener('error', handleLoad, { once: true }); // Count errors as loaded
+                
+                // Fallback check in case the load event was missed
+                setTimeout(() => {
+                    if (link.sheet || link.disabled) {
+                        handleLoad();
+                    }
+                }, 2000);
+            }
+        });
+        
+        if (loadedStylesheets >= totalStylesheets) {
+            this.markResourceLoaded('styles', 'Styles indlæst');
+        }
+        
+        // If no local stylesheets, mark as loaded
+        if (totalStylesheets === 0) {
+            this.markResourceLoaded('styles', 'Styles indlæst');
+        }
+    }
+    
+    monitorImages() {
+        const images = document.querySelectorAll('img');
+        if (images.length === 0) {
+            this.markResourceLoaded('images', 'Billeder indlæst');
+            return;
+        }
+        
+        let loadedImages = 0;
+        const totalImages = images.length;
+        
+        images.forEach(img => {
+            if (img.complete && (img.naturalWidth > 0 || img.src === '')) {
+                loadedImages++;
+            } else {
+                const handleLoad = () => {
+                    loadedImages++;
+                    if (loadedImages >= totalImages) {
+                        this.markResourceLoaded('images', 'Billeder indlæst');
+                    }
+                };
+                
+                img.addEventListener('load', handleLoad, { once: true });
+                img.addEventListener('error', handleLoad, { once: true }); // Count failed images as loaded
+                
+                // Timeout for slow images
+                setTimeout(() => {
+                    if (!img.complete) {
+                        console.warn(`Image loading timeout: ${img.src}`);
+                        handleLoad();
+                    }
+                }, 3000);
+            }
+        });
+        
+        if (loadedImages >= totalImages) {
+            this.markResourceLoaded('images', 'Billeder indlæst');
+        }
+    }
+    
+    monitorFonts() {
+        if (document.fonts && document.fonts.ready) {
+            Promise.race([
+                document.fonts.ready,
+                new Promise(resolve => setTimeout(resolve, 2000)) // 2 second timeout
+            ]).then(() => {
+                this.markResourceLoaded('fonts', 'Skrifttyper indlæst');
+            }).catch(() => {
+                // Even if font loading fails, mark as loaded to prevent hanging
+                this.markResourceLoaded('fonts', 'Skrifttyper indlæst');
+            });
+        } else {
+            // Fallback for browsers without font loading API
+            setTimeout(() => {
+                this.markResourceLoaded('fonts', 'Skrifttyper indlæst');
+            }, 1500);
+        }
+    }
+    
+    markResourceLoaded(resourceType, message) {
+        if (!this.resourcesLoaded[resourceType]) {
+            this.resourcesLoaded[resourceType] = true;
+            this.loadedCount++;
+            console.log(`🔄 LoadingManager: ${message} (${this.loadedCount}/${this.totalResources})`);
+            
+            this.updateProgress();
+            
+            if (this.loadedCount >= this.totalResources) {
+                this.hideLoadingScreen();
+            }
+        }
+    }
+    
+    updateProgress() {
+        const progressBar = document.querySelector('.loading-progress-bar');
+        if (progressBar) {
+            const percentage = (this.loadedCount / this.totalResources) * 100;
+            progressBar.style.width = `${percentage}%`;
+        }
+    }
+    
+    updateLoadingText() {
+        const messages = [
+            'Indlæser ressourcer...',
+            'Forbereder spil...',
+            'Samler terninger...',
+            'Organiserer hære...',
+            'Næsten klar...'
+        ];
+        
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+            if (this.loadingText && this.loadingScreen && !this.loadingScreen.classList.contains('hidden')) {
+                this.loadingText.textContent = messages[currentIndex];
+                currentIndex = (currentIndex + 1) % messages.length;
+            } else {
+                clearInterval(interval);
+            }
+        }, 800);
+    }
+    
+    hideLoadingScreen() {
+        const elapsedTime = Date.now() - this.startTime;
+        const remainingTime = Math.max(0, this.minimumDisplayTime - elapsedTime);
+        
+        setTimeout(() => {
+            console.log('🔄 LoadingManager: All resources loaded, hiding loading screen');
+            if (this.loadingText) {
+                this.loadingText.textContent = 'Klar!';
+            }
+            
+            setTimeout(() => {
+                if (this.loadingScreen) {
+                    this.loadingScreen.classList.add('hidden');
+                    
+                    // Remove loading screen from DOM after transition
+                    setTimeout(() => {
+                        if (this.loadingScreen && this.loadingScreen.parentNode) {
+                            this.loadingScreen.remove();
+                        }
+                        console.log('🔄 LoadingManager: Loading screen removed');
+                    }, 500);
+                }
+            }, 300);
+        }, remainingTime);
+    }
+    
+    // Method for external scripts to notify when they're loaded
+    notifyComponentLoaded(componentId) {
+        if (!this.componentsLoaded.includes(componentId)) {
+            this.componentsLoaded.push(componentId);
+            console.log(`🔄 LoadingManager: External component ${componentId} loaded`);
+            
+            if (this.componentsLoaded.length >= this.componentsToLoad.length) {
+                this.markResourceLoaded('components', 'Komponenter indlæst');
+            }
+        }
+    }
+    
+    // Manual trigger for debugging
+    forceHide() {
+        console.log('🔄 LoadingManager: Force hiding loading screen');
+        this.hideLoadingScreen();
+    }
+}
+
+// Initialize loading manager immediately (before DOM ready)
+const loadingManager = new LoadingManager();
+
+// Add global debug function for manual control
+window.hideLoading = function() {
+    console.log('🔧 Debug: Manually hiding loading screen');
+    if (window.loadingManager) {
+        window.loadingManager.forceHide();
+    } else {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+                if (loadingScreen.parentNode) {
+                    loadingScreen.remove();
+                }
+            }, 500);
+        }
+    }
+};
+
 // Theme Management System
 class ThemeManager {
     constructor() {

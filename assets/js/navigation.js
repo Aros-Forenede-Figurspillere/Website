@@ -20,6 +20,19 @@ class ComponentLoader {
             const componentHTML = await response.text();
             container.innerHTML = componentHTML;
             
+            // Notify loading manager that dynamic content is loaded
+            if (window.loadingManager) {
+                window.loadingManager.notifyComponentLoaded(containerId);
+                
+                // If this is the head container, re-monitor resources
+                if (containerId === 'head-container') {
+                    setTimeout(() => {
+                        window.loadingManager.monitorStylesheets();
+                        window.loadingManager.monitorFonts();
+                    }, 100);
+                }
+            }
+            
             // Run component-specific initialization
             if (containerId === 'navigation-container') {
                 this.initializeNavigation();
