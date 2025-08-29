@@ -12,21 +12,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aros-forenede-figurspillere.github.io/Website/">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
-    <link rel="manifest" href="site.webmanifest">
-    
-    <!-- Humans.txt -->
-    <link type="text/plain" rel="author" href="humans.txt" />
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -67,33 +54,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="assets/images/aros-logo.png" alt="Aros Logo" class="logo-image">
-                <h2>Aros Forenede Figurspillere</h2>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#hjem" class="nav-link">Hjem</a>
-                <a href="#om-os" class="nav-link">Om Os</a>
-                <a href="#events" class="nav-link">Events</a>
-                <a href="#galleri" class="nav-link">Galleri</a>
-                <a href="pages/dice-game.html" class="nav-link">🎲 Terning Spil</a>
-                <a href="pages/warmachine-mkiv.html" class="nav-link">⚔️ Warmachine MKIV</a>
-                <a href="#kontakt" class="nav-link">Kontakt</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-sun icon sun-icon"></i>
-                    <i class="fas fa-moon icon moon-icon"></i>
-                </button>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            </div>
-        </div>
-    </nav>
+    <div id="navigation-container"></div>
 
     <!-- Hero Section -->
     <section id="hjem" class="hero">
@@ -338,43 +299,10 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Aros Forenede Figurspillere</h3>
-                    <p>Aarhus' forening for tabletop wargaming spillere</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hjem">Hjem</a></li>
-                        <li><a href="#om-os">Om Os</a></li>
-                        <li><a href="#events">Events</a></li>
-                        <li><a href="#kontakt">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Følg Os</h4>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/arosforenedefigurspillere" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Aros Forenede Figurspillere. Alle rettigheder forbeholdes.</p>
-                <p class="credits-link">
-                    <a href="#credits" style="color: #bdc3c7; text-decoration: none; font-size: 0.8rem;">
-                        <i class="fas fa-info-circle"></i> Website Credits
-                    </a>
-                </p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <!-- JavaScript -->
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
 </body>
 </html>

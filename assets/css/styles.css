@@ -240,6 +240,20 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     gap: 2rem;
     align-items: center;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* Ensure identical behavior for both div and ul elements */
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.nav-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
 }
 
 .nav-link {
@@ -248,6 +262,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
+    white-space: nowrap;
+    padding: 0.5rem 0.5rem;
 }
 
 .nav-link:hover {
@@ -299,6 +315,87 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+
+/* Dropdown Navigation */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-arrow,
+.nav-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dropdown-link {
+    display: block;
+    color: var(--nav-text);
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.dropdown-link:hover {
+    background: var(--bg-accent);
+    color: var(--nav-hover);
+    transform: translateX(5px);
+}
+
+.dropdown-link[href="#"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.dropdown-link[href="#"]:hover {
+    background: transparent;
+    color: var(--nav-text);
+    transform: none;
 }
 
 .theme-toggle:hover {
@@ -812,6 +909,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Responsive Design */
+/* Medium screens - reduce navigation spacing */
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+}
+
+/* Tablet screens - further reduce spacing */
+@media (max-width: 900px) {
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.3rem;
+    }
+    
+    .theme-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -836,6 +963,43 @@ h1, h2, h3, h4, h5, h6 {
     .nav-menu a {
         padding: 1rem 0;
         display: block;
+    }
+    
+    /* Mobile dropdown styles */
+    .nav-dropdown .dropdown-menu {
+        position: static;
+        background: rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transform: none;
+        transition: all 0.3s ease;
+        padding: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .nav-dropdown.active .dropdown-menu {
+        opacity: 1;
+        max-height: 300px;
+        padding: 0.5rem 0;
+    }
+    
+    .dropdown-link {
+        padding: 0.75rem 2rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .dropdown-link:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: none;
     }
     
     .hero {
@@ -965,10 +1129,6 @@ h1, h2, h3, h4, h5, h6 {
         width: 40px;
         height: 40px;
         font-size: 1rem;
-    }
-    
-    .nav-menu {
-        gap: 1rem;
     }
 }
 

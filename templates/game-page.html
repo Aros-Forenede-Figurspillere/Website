@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[GAME_NAME] | Aros Forenede Figurspillere</title>
+    <meta name="description" content="[GAME_DESCRIPTION]">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        .game-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('../assets/images/[GAME_FOLDER]/hero-background.jpg') center/cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1rem;
+            color: [THEME_COLOR];
+        }
+        
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+        
+        .faction-grid, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--border-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            border-color: var(--color-primary);
+            background: var(--section-bg-alt);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: white;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .faction-grid, .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation loaded dynamically -->
+    <div id="navigation-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="game-hero">
+        <div class="hero-content">
+            <h1>[GAME_NAME]</h1>
+            <p>"[GAME_TAGLINE]"</p>
+            <p>[GAME_INTRO]</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Game Overview -->
+        <section id="overview" class="section">
+            <h2>Hvad er [GAME_NAME]?</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>[GAME_OVERVIEW_TEXT]</p>
+                </div>
+                <div class="image-content">
+                    <img src="../assets/images/[GAME_FOLDER]/overview.jpg" alt="[GAME_NAME] Overview" class="section-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <h2>Hvorfor Spille [GAME_NAME]?</h2>
+            <div class="features-grid">
+                <!-- Feature items go here -->
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Klar til at Spille [GAME_NAME]?</h2>
+                <p>Slut dig til Aros Forenede Figurspillere og oplev [GAME_NAME] sammen med andre entusiaster!</p>
+                <div class="btn-group">
+                    <a href="../index.html#kontakt" class="btn">Kontakt Os</a>
+                    <a href="../index.html#events" class="btn">Se Events</a>
+                    <a href="[OFFICIAL_WEBSITE]" target="_blank" class="btn">Official Website</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Component loader and scripts -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer 40,000 | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Dyb dig ned i Warhammer 40,000's mørke fremtid - det ultimative sci-fi miniature wargame. Space Marines, Chaos, Tyranids og episke slag i det 41. årtusinde.">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        .warhammer40k-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(139, 0, 0, 0.7)), 
+                        url('../assets/images/warhammer40k/hero-background.png') center/cover;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            font-family: 'Cinzel', serif;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+        
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .faction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .faction-content {
+            padding: 1.5rem;
+        }
+        
+        .faction-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .lore-section {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            min-width: 100px;
+            margin-right: 1rem;
+        }
+        
+        .game-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .mode-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--border-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .mode-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+        }
+        
+        .mode-icon {
+            font-size: 3rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--border-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            border-color: var(--color-primary);
+            background: var(--section-bg-alt);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: white;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Gallery Section */
+        .section-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 16/10;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Showcase Section */
+        .showcase-section {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .showcase-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            min-height: 300px;
+        }
+        
+        .showcase-item.large {
+            grid-row: span 2;
+            min-height: 400px;
+        }
+        
+        .showcase-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .showcase-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .showcase-item:hover .showcase-image {
+            transform: scale(1.05);
+        }
+        
+        .showcase-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+        
+        .showcase-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .showcase-content p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Fix for section visibility - ensure sections are visible by default on this page */
+        .section {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Overview Section Redesign */
+        .overview-redesign {
+            background: var(--section-bg-alt);
+            padding: 5rem 2rem;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+        
+        .overview-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .overview-header h2 {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .overview-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .overview-main {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 2rem;
+        }
+        
+        .overview-text {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .overview-text h3 {
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .overview-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+        
+        .overview-image-main {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-battle-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 300px;
+            transition: transform 0.3s ease;
+        }
+        
+        .overview-image-main:hover .main-battle-image {
+            transform: scale(1.05);
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .overview-features {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--border-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--color-primary);
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-image {
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .feature-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-img {
+            transform: scale(1.1);
+        }
+        
+        .feature-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 0.8rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .feature-content p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+        
+        .overview-stats {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--border-accent);
+            margin-top: auto;
+        }
+        
+        .overview-stats h4 {
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--section-bg-alt);
+            border-radius: 10px;
+            border: 1px solid var(--border-accent);
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .faction-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .showcase-item.large {
+                grid-row: span 1;
+                grid-column: span 2;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .overview-features {
+                grid-column: 1;
+                order: 1;
+            }
+            
+            .overview-main {
+                order: 2;
+            }
+            
+            .overview-stats {
+                order: 3;
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-modes {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 16/9;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .showcase-item.large {
+                grid-row: span 1;
+                grid-column: span 1;
+            }
+            
+            .overview-redesign {
+                padding: 3rem 1rem;
+                margin: 2rem 0;
+            }
+            
+            .overview-header h2 {
+                font-size: 2.5rem;
+            }
+            
+            .overview-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .overview-text,
+            .overview-stats {
+                padding: 2rem;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-5px);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation loaded dynamically -->
+    <div id="navigation-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="warhammer40k-hero">
+        <div class="hero-content">
+            <h1>Warhammer 40,000</h1>
+            <p>"I det mørke, fjerne fremtid er der kun krig..."</p>
+            <p>Oplev det ultimative sci-fi miniature wargame hvor menneskeheden kæmper for overlevelse i det 41. årtusinde.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Game Overview -->
+        <section id="overview" class="section overview-redesign">
+            <div class="overview-header">
+                <h2>Hvad er Warhammer 40,000?</h2>
+                <p class="overview-subtitle">Det ultimative sci-fi miniature wargame i et dystopisk univers</p>
+            </div>
+            
+            <div class="overview-grid">
+                <!-- Main Content Block -->
+                <div class="overview-main">
+                    <div class="overview-text">
+                        <h3>🌌 Et Univers i Krig</h3>
+                        <p>Warhammer 40,000 (også kendt som Warhammer 40K eller bare 40K) er et tabletop miniature wargame skabt af Games Workshop. Spillet udspiller sig i et dystopisk sci-fi univers i det 41. årtusinde, hvor menneskeheden kæmper for overlevelse mod utallige trusler.</p>
+                    </div>
+                    <div class="overview-image-main">
+                        <img src="../assets/images/warhammer40k/overview.jpeg" alt="Warhammer 40k Battle Scene" class="main-battle-image">
+                        <div class="image-caption">Episke slag på tværs af galaksen</div>
+                    </div>
+                </div>
+                
+                <!-- Feature Cards -->
+                <div class="overview-features">
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <img src="../assets/images/warhammer40k/gallery-imperial-forces.png" alt="Command Your Forces" class="feature-img">
+                        </div>
+                        <div class="feature-content">
+                            <h4>⚔️ Led Dine Tropper</h4>
+                            <p>Som kommandør leder du dine tropper i episke slag. Hver fraktion har deres unikke spillestil og strategier.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <img src="../assets/images/warhammer40k/gallery-battlefields.png" alt="Epic Battlefields" class="feature-img">
+                        </div>
+                        <div class="feature-content">
+                            <h4>🏛️ Episke Slagmarker</h4>
+                            <p>Kæmp på ødelagte verdener, ruinerede byer og alien landskaber med detaljerede terræn og objectives.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-image">
+                            <img src="../assets/images/warhammer40k/gallery-war-machines.png" alt="War Machines" class="feature-img">
+                        </div>
+                        <div class="feature-content">
+                            <h4>🤖 Massive Krigsmaskiner</h4>
+                            <p>Fra elite infantry til gigantiske tanks og titans - byg og mal din helt egen hær af miniatures.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Panel -->
+                <div class="overview-stats">
+                    <h4>Spil Facts</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">Fraktioner</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1987</span>
+                            <span class="stat-label">Første udgivelse</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500-3000</span>
+                            <span class="stat-label">Point range</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2-8</span>
+                            <span class="stat-label">Spillere</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Showcase -->
+        <section class="showcase-section">
+            <div class="container">
+                <h2>Oplev Galaksens Magt</h2>
+                <div class="showcase-grid">
+                    <div class="showcase-item large">
+                        <img src="../assets/images/warhammer40k/showcase-epic-battle.jpeg" alt="Epic Warhammer 40K Battle" class="showcase-image">
+                        <div class="showcase-content">
+                            <h3>Episke Slag</h3>
+                            <p>Hvor helte fødes og legender skabes</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="../assets/images/warhammer40k/showcase-armies.png" alt="40K Forces" class="showcase-image">
+                        <div class="showcase-content">
+                            <h3>Magtfulde Hære</h3>
+                            <p>Saml dine styrker</p>
+                        </div>
+                    </div>
+                    <div class="showcase-item">
+                        <img src="../assets/images/warhammer40k/showcase-universe.png" alt="40K Universe" class="showcase-image">
+                        <div class="showcase-content">
+                            <h3>Grimt Univers</h3>
+                            <p>Der er kun krig</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Factions Grid -->
+        <section id="factions" class="section">
+            <h2>Vælg Din Fraktion</h2>
+            <div class="faction-grid">
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/space-marines.jpg" alt="Space Marines" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Space Marines</h3>
+                        <p>Menneskelighedens fineste krigere - genetisk modificerede supersoldater i kraftige rustninger. Alsidige og elitære med stærke enheder og taktisk fleksibilitet.</p>
+                        <ul>
+                            <li>💪 Høj toughness og armor saves</li>
+                            <li>🎯 Præcise våben og specialistenheder</li>
+                            <li>⚡ Kraftige psykiske evner</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/chaos.png" alt="Chaos Space Marines" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Chaos Space Marines</h3>
+                        <p>Faldne Space Marines korrumperet af Chaos' magt. Brutale angreb og dæmoniske forstærkninger gør dem til en frygtindgydende fjende.</p>
+                        <ul>
+                            <li>😈 Dæmoniske besværgelser og ritualer</li>
+                            <li>🔥 Ødelæggende close combat evner</li>
+                            <li>⚔️ Chaos artefakter og mutations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/tyranids.png" alt="Tyranids" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Tyranids</h3>
+                        <p>En alien race af biologiske skabninger der fortærer alt på deres vej. Horde-taktik og adaptationsevner gør dem uforudsigelige.</p>
+                        <ul>
+                            <li>🐛 Massive antal enheder</li>
+                            <li>🧬 Biologiske våben og adaptationer</li>
+                            <li>👑 Synapse-netværk og hive mind</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/orks.png" alt="Orks" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Orks</h3>
+                        <p>Brutale, grønne aliens der lever for krig og kaos. Skrammel-teknologi og nærkamp gør hver enhed til en overraskelse.</p>
+                        <ul>
+                            <li>💥 Eksplosive og uforudsigelige våben</li>
+                            <li>⚡ WAAAGH! energi og mob regler</li>
+                            <li>🔧 Improviseret udstyr og køretøjer</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/eldar.png" alt="Aeldari" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Aeldari (Eldar)</h3>
+                        <p>En gammel og sofistikeret race med avanceret teknologi og psykiske evner. Hurtige og dødbringende, men skrøbelige.</p>
+                        <ul>
+                            <li>⚡ Høj mobilitet og hastighed</li>
+                            <li>🔮 Kraftige psykiske evner</li>
+                            <li>🛡️ Avancerede våben og teknologi</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/warhammer40k/necrons.png" alt="Necrons" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Necrons</h3>
+                        <p>Urgamle robottiske skeletter der vågner fra millioner af års dvale. Næsten uforgængelige med selvhelbredende evner.</p>
+                        <ul>
+                            <li>🤖 Reanimation protocols</li>
+                            <li>⚡ Avancerede energy våben</li>
+                            <li>👑 Dynastic codes og noble courts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Section -->
+        <section id="gallery" class="section">
+            <h2>Galakse i Krig - Billeder fra Slagmarken</h2>
+            <p class="section-intro">Udforsk det mørke univers gennem episke kampscener, majestætiske enheder og ikoniske øjeblikke fra det 41. årtusinde.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-epic-battle.png" alt="Epic Battle Scene" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Episk Slag</h4>
+                        <p>Massive konfrontationer præger galaksen</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-imperial-forces.png" alt="Imperial Forces" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Imperial Styrker</h4>
+                        <p>Kejserens mægtige legioner</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-chaos-corruption.png" alt="Chaos Corruption" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Chaos Korrumption</h4>
+                        <p>Mørkets magt spreder sig</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-alien-threats.png" alt="Alien Threats" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Xenos Trusler</h4>
+                        <p>Fremmedartede racer angriber</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-battlefields.png" alt="Battlefields" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Slagmarker</h4>
+                        <p>Ødelagte verdener og ruiner</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/warhammer40k/gallery-war-machines.png" alt="War Machines" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4>Krigsmaskiner</h4>
+                        <p>Gigantiske kampkøretøjer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Modes -->
+        <section id="game-modes" class="section">
+            <h2>Spiltilstande</h2>
+            <div class="game-modes">
+                <div class="mode-card">
+                    <div class="mode-icon">⚔️</div>
+                    <h3>Combat Patrol</h3>
+                    <p>500 points - Perfect for begyndere og hurtige spil. Introducer grundlæggende regler og taktikker.</p>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">🏆</div>
+                    <h3>Incursion</h3>
+                    <p>1000 points - Balancerede slag med plads til specialistenheder og avancerede strategier.</p>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">🌟</div>
+                    <h3>Strike Force</h3>
+                    <p>2000 points - Standard turneringsstørrelse med fulde armeer og alle enheder tilgængelige.</p>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">💀</div>
+                    <h3>Onslaught</h3>
+                    <p>3000+ points - Massive apocalyptiske slag med superheavy enheder og episk skala.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lore Section -->
+        <section class="lore-section">
+            <div class="container">
+                <h2>Det 41. Årtusinde</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">M30</div>
+                        <div class="timeline-content">
+                            <h4>The Great Crusade</h4>
+                            <p>Kejseren af Menneskeheden leder sine Legioner ud for at generobre galaksen og forene menneskeheden under Imperial Truth.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">M31</div>
+                        <div class="timeline-content">
+                            <h4>Horus Heresy</h4>
+                            <p>Warmaster Horus forråder Kejseren og starter en borgerkrig der ødelægger Imperiet og Kejseren selv.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">M41</div>
+                        <div class="timeline-content">
+                            <h4>Det Mørke Årtusinde</h4>
+                            <p>Imperiet er i forfald. Xenos races truer fra alle sider, mens Chaos korrumperer indefra. Der er kun krig.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">M42</div>
+                        <div class="timeline-content">
+                            <h4>Era Indomitus</h4>
+                            <p>Roboute Guilliman vender tilbage og leder en ny crusade med Primaris Space Marines mod Chaos og xenos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <h2>Hvorfor Spille Warhammer 40,000?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Kreativitet</h3>
+                    <p>Mal og tilpas dine miniatures med unikke farver, våben og baser. Din hær afspejler din personlige stil.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Strategi</h3>
+                    <p>Dyb taktisk gameplay med konstant udvikling. Mestre positioning, resource management og timing.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <h3>Rich Lore</h3>
+                    <p>Et dystopisk univers fyldt med episke historier, karakterer og konflikter der spænder over årtusinder.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community</h3>
+                    <p>Verdensomspændende community af spillere, malere og lore-entusiaster der deler passion for hobbyen.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Competitive</h3>
+                    <p>Aktiv turneringsscene med Grand Tournament format og professionelle spillere verden over.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Customization</h3>
+                    <p>Byg din hær præcis som du vil med detachments, stratagems og army rules der passer til din spillestil.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Klar til at Indtræde i det 41. Årtusinde?</h2>
+                <p>Slut dig til Aros Forenede Figurspillere og oplev Warhammer 40,000 sammen med andre entusiaster!</p>
+                <div class="btn-group">
+                    <a href="../index.html#kontakt" class="btn">Kontakt Os</a>
+                    <a href="../index.html#events" class="btn">Se Events</a>
+                    <a href="https://www.games-workshop.com/da-DK/Warhammer-40-000" target="_blank" class="btn">Official Website</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Component loader and scripts -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
+</body>
+</html>

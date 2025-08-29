@@ -6,18 +6,8 @@
     <title>Warmachine MKIV | Aros Forenede Figurspillere</title>
     <meta name="description" content="Lær alt om Warmachine MKIV - det ultimative miniature wargame. Strategisk kamp med warjacks, warcasters og episke slag på slagmarken.">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
-    <link rel="manifest" href="../site.webmanifest">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Main stylesheet for theme system -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
     
     <!-- Custom CSS for this page -->
     <style>
@@ -73,7 +63,7 @@
         }
         
         .faction-card h3 {
-            color: var(--primary-color);
+            color: var(--color-primary);
             font-family: 'Cinzel', serif;
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
@@ -105,7 +95,7 @@
         
         .feature-item i {
             font-size: 3rem;
-            color: var(--primary-color);
+            color: var(--color-primary);
             margin-bottom: 1rem;
         }
         
@@ -122,7 +112,7 @@
         }
         
         .rules-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: var(--text-light);
             padding: 3rem 0;
             border-radius: 12px;
@@ -184,13 +174,13 @@
         }
         
         .starter-card h4 {
-            color: var(--primary-color);
+            color: var(--color-primary);
             font-family: 'Cinzel', serif;
             margin-bottom: 1rem;
         }
         
         .price-tag {
-            background: var(--primary-color);
+            background: var(--color-primary);
             color: var(--text-light);
             padding: 5px 15px;
             border-radius: 20px;
@@ -209,7 +199,7 @@
         
         .join-section h2 {
             font-family: 'Cinzel', serif;
-            color: var(--primary-color);
+            color: var(--color-primary);
             margin-bottom: 1rem;
         }
         
@@ -240,47 +230,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="../index.html">
-                    <img src="../assets/images/aros-logo.png" alt="Aros FF Logo" class="logo-img">
-                    Aros FF
-                </a>
-            </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="../index.html#hjem" class="nav-link">Hjem</a>
-                </li>
-                <li class="nav-item">
-                    <a href="../index.html#om-os" class="nav-link">Om Os</a>
-                </li>
-                <li class="nav-item">
-                    <a href="../index.html#events" class="nav-link">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a href="dice-game.html" class="nav-link">Terning Spil</a>
-                </li>
-                <li class="nav-item">
-                    <a href="warmachine-mkiv.html" class="nav-link active">Warmachine MKIV</a>
-                </li>
-                <li class="nav-item">
-                    <a href="../index.html#kontakt" class="nav-link">Kontakt</a>
-                </li>
-                <li class="nav-item theme-toggle-container">
-                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
-                        <i class="fas fa-sun icon sun-icon"></i>
-                        <i class="fas fa-moon icon moon-icon"></i>
-                    </button>
-                </li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+    <div id="navigation-container"></div>
 
     <!-- Hero Section -->
     <section class="warmachine-hero">
@@ -309,7 +259,7 @@
         <!-- Game Features -->
         <section class="game-features">
             <div class="container">
-                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--color-primary);">
                     Hvad Gør Warmachine Unikt?
                 </h2>
                 <div class="features-grid">
@@ -339,7 +289,7 @@
 
         <!-- Factions -->
         <section class="factions-section">
-            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--color-primary);">
                 Vælg Din Faction
             </h2>
             <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
@@ -428,7 +378,7 @@
 
         <!-- Getting Started -->
         <section class="getting-started">
-            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+            <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--color-primary);">
                 Kom I Gang Med Warmachine
             </h2>
             <p style="text-align: center; color: var(--text-secondary);">
@@ -471,7 +421,7 @@
         <!-- Featured Content Section -->
         <section class="game-features">
             <div class="container">
-                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--color-primary);">
                     Nyheder & Opdateringer
                 </h2>
                 <div class="features-grid">
@@ -509,7 +459,7 @@
         <!-- What We Offer -->
         <section class="game-features">
             <div class="container">
-                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--primary-color);">
+                <h2 style="text-align: center; font-family: 'Cinzel', serif; color: var(--color-primary);">
                     Hvad Tilbyder Vi?
                 </h2>
                 <div class="features-grid">
@@ -539,53 +489,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Aros Forenede Figurspillere</h4>
-                    <p>Aarhus' førende forening for tabletop wargaming. Slut dig til vores community og oplev fantastiske spil, fællesskab og konkurrence.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Spil Vi Spiller</h4>
-                    <ul>
-                        <li>Warmachine MKIV</li>
-                        <li>Warhammer 40k</li>
-                        <li>Moonstone</li>
-                        <li>Age of Sigmar</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html#hjem">Hjem</a></li>
-                        <li><a href="../index.html#om-os">Om Os</a></li>
-                        <li><a href="../index.html#events">Events</a></li>
-                        <li><a href="../index.html#kontakt">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Følg Os</h4>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/arosforenedefigurspillere" target="_blank" rel="noopener noreferrer" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Aros Forenede Figurspillere. Alle rettigheder forbeholdes.</p>
-                <p style="font-size: 0.8rem; opacity: 0.7;">
-                    Warmachine images downloaded from and courtesy of Steamforged Games (steamforged.com). 
-                    Warmachine is a trademark of Steamforged Games Limited. Used for promotional/community purposes.
-                </p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
     <!-- JavaScript -->
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
 </body>
 </html>

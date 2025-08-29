@@ -6,19 +6,8 @@
     <title>Terning Spil | Aros Forenede Figurspillere</title>
     <meta name="description" content="Spil vores sjove terning spil! Perfekt for tabletop gaming entusiaster fra Aros Forenede Figurspillere.">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Main stylesheet for theme system -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
     
     <style>
         /* Dice Game Specific Styles with Theme Support */
@@ -29,52 +18,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: rgba(44, 62, 80, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .nav-logo h2 {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0;
-            font-family: 'Cinzel', serif;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #e74c3c;
         }
 
         /* Main Content */
@@ -322,10 +265,6 @@
                 font-size: 3rem;
             }
 
-            .nav-links {
-                display: none;
-            }
-
             .stats {
                 grid-template-columns: 1fr 1fr;
             }
@@ -362,21 +301,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>🎲 Aros Terning Spil</h2>
-            </div>
-            <div class="nav-links">
-                <a href="../index.html" class="nav-link">Tilbage til Hjemmeside</a>
-                <a href="../index.html#kontakt" class="nav-link">Kontakt</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-sun icon sun-icon"></i>
-                    <i class="fas fa-moon icon moon-icon"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <div id="navigation-container"></div>
 
     <!-- Main Content -->
     <div class="container">
@@ -445,14 +370,8 @@
         </div>
     </div>
 
-    <!-- Small Credits Footer -->
-    <footer style="background: rgba(44, 62, 80, 0.9); padding: 1rem; text-align: center; color: #bdc3c7; font-size: 0.8rem;">
-        <p>
-            🎲 Terning Spil skabt af <strong>Aros Forenede Figurspillere</strong> i samarbejde med <strong>GitHub Copilot</strong> (August 2025)
-            <br>
-            <a href="../index.html" style="color: #e74c3c; text-decoration: none;">← Tilbage til Hjemmeside</a>
-        </p>
-    </footer>
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
 
     <script>
         class DiceGame {
@@ -647,7 +566,8 @@
         console.log('Tryk R for at nulstille spillet.');
     </script>
     
-    <!-- Theme Management -->
-    <script src="../assets/js/script.js"></script>
+    <!-- JavaScript -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
 </body>
 </html>
