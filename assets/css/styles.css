@@ -12,6 +12,8 @@
     --text-secondary: #666666;
     --text-light: #999999;
     --text-inverse: #ffffff;
+    --text-on-dark: #ffffff;
+    --text-on-light: #000000;
     
     --border-color: #dee2e6;
     --border-accent: rgba(255, 255, 255, 0.2);
@@ -38,6 +40,11 @@
     --hero-bg: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
     --hero-text: #ffffff;
     --hero-overlay: rgba(0, 0, 0, 0.3);
+    
+    /* Alignment colors for light mode */
+    --alignment-order-text: #000000;
+    --alignment-neutral-text: #000000;
+    --alignment-evil-text: #ffffff;
 }
 
 /* Dark Theme */
@@ -53,6 +60,8 @@
     --text-secondary: #b0b0b0;
     --text-light: #808080;
     --text-inverse: #121212;
+    --text-on-dark: #ffffff;
+    --text-on-light: #000000;
     
     --border-color: #404040;
     --border-accent: rgba(255, 255, 255, 0.1);
@@ -68,6 +77,11 @@
     /* Hero section in dark mode */
     --hero-bg: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
     --hero-overlay: rgba(0, 0, 0, 0.5);
+    
+    /* Alignment colors for dark mode */
+    --alignment-order-text: #000000;
+    --alignment-neutral-text: #ffffff;
+    --alignment-evil-text: #ffffff;
 }
 
 /* Base styles */
@@ -75,6 +89,43 @@
 /* Theme transition for smooth switching */
 * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Global dark mode text visibility fixes */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div {
+    color: var(--text-secondary);
+}
+
+/* Ensure good contrast for specific elements in dark mode */
+[data-theme="dark"] .event-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .faction-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .feature-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .gallery-item {
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 /* Reset and Base Styles */
@@ -638,13 +689,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .event-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: 15px;
     padding: 2rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-medium);
     display: flex;
     gap: 1.5rem;
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .event-card:hover {
@@ -677,13 +729,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .event-info h3 {
-    color: #2c3e50;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
 }
 
 .event-info p {
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.6;
 }
@@ -698,7 +750,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #888;
+    color: var(--text-light);
     font-size: 0.9rem;
 }
 
@@ -832,7 +884,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Gallery Section */
 .gallery {
     padding: 80px 0;
-    background: white;
+    background: var(--bg-secondary);
 }
 
 .gallery-grid {
@@ -873,7 +925,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gallery-placeholder p {
-    color: #666;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 

@@ -41,50 +41,7 @@
     "@type": "Organization",
     "name": "Danish Gaming Community"
   },
-  "event": [
-    {
-      "@type": "Event",
-      "name": "Månedlig Turnering",
-      "description": "Månedlige turneringer i forskellige spilsystemer",
-      "eventSchedule": {
-        "@type": "Schedule",
-        "repeatFrequency": "P1M",
-        "byDay": "Sunday"
-      },
-      "location": {
-        "@type": "Place",
-        "name": "Aros Gaming Center",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Aarhus",
-          "addressCountry": "DK"
-        }
-      },
-      "organizer": {
-        "@type": "Organization",
-        "name": "Aros Forenede Figurspillere"
-      }
-    },
-    {
-      "@type": "Event",
-      "name": "Begynder Workshop",
-      "description": "Workshop for nye spillere",
-      "eventSchedule": {
-        "@type": "Schedule",
-        "repeatFrequency": "P1M"
-      },
-      "location": {
-        "@type": "Place",
-        "name": "Klubhuset",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Aarhus",
-          "addressCountry": "DK"
-        }
-      }
-    }
-  ],
-  "openingHours": "Su 13:00-18:00",
+  "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Gaming Services",

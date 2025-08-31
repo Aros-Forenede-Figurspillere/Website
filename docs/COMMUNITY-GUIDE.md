@@ -29,25 +29,25 @@ Welcome to Aros Forenede Figurspillere! We're excited to have you join our table
 **Official Updates**: [facebook.com/arosforenedefigurspillere](https://www.facebook.com/arosforenedefigurspillere)
 
 ### What you'll find on Facebook:
-- **Event Announcements**: Official tournament and meeting notifications
+- **Event Coordination**: Community activities organized through Discord and Facebook
 - **Photo Galleries**: Pictures from events and gaming sessions
 - **News & Updates**: Club news and important announcements
 - **Event RSVPs**: Confirm attendance for tournaments and special events
 - **Community Highlights**: Member achievements and showcases
 
-## 🏠 In-Person Meetings
+## 🏠 Community Activities
 
-### Regular Meetings
-- **When**: Every Sunday, 13:00-18:00
-- **Where**: Our clubhouse in Aarhus
-- **What to Bring**: Your army, dice, measuring tools, and enthusiasm!
+### How We Connect
+- **Discord**: Daily discussions and game coordination  
+- **Facebook**: Official updates and community posts
+- **In-person Gaming**: Various activities organized through Discord/Facebook
 - **New Player Friendly**: Experienced members happy to teach
 
-### What Happens at Meetings
+### What We Do Together
 - **Casual Games**: Pick-up games in various systems
 - **Painting Sessions**: Work on your models with others
 - **Rules Teaching**: Learn new game systems
-- **Tournament Practice**: Prepare for competitive events
+- **Community Events**: Activities coordinated through our social channels
 - **Social Time**: Get to know fellow gamers
 
 ## 🎮 Games We Play
@@ -77,11 +77,11 @@ Welcome to Aros Forenede Figurspillere! We're excited to have you join our table
 2. Like and follow the page
 3. Turn on notifications for events
 
-### Step 3: Attend a Meeting
-1. Check Discord or Facebook for next Sunday meeting
-2. Show up at our clubhouse (address posted in Discord)
-3. Introduce yourself to members
-4. Jump into a game or watch to learn
+### Step 3: Connect with the Community
+1. Check Discord for current activities and discussions
+2. Follow Facebook for community updates
+3. Introduce yourself to members in the chat
+4. Ask about games you're interested in learning
 
 ## 💡 Tips for New Members
 
@@ -105,17 +105,17 @@ Welcome to Aros Forenede Figurspillere! We're excited to have you join our table
 
 ## 🏆 Community Events
 
-### Regular Events
-- **Sunday Meetings**: Every week, casual gaming
-- **Monthly Tournaments**: First Saturday of each month
-- **Painting Sessions**: Second Sunday monthly
-- **Beginner Workshops**: Third Saturday monthly
+### Community Activities (Organized through Discord/Facebook)
+- **Gaming Sessions**: Regular gaming meetups
+- **Hobby Activities**: Painting and modeling sessions  
+- **Learning Opportunities**: New player introductions
+- **Community Events**: Various social activities
 
-### Special Events
-- **Annual Championship**: Summer tournament series
-- **Hobby Showcase**: Annual painting competition
-- **Game Release Events**: Celebrate new releases
-- **Social Events**: BBQs, holiday parties, and more
+### Special Activities
+- **Tournaments**: Community competitions
+- **Hobby Showcases**: Share your painted models
+- **Game Launches**: Celebrate new releases with the community
+- **Social Gatherings**: Community meetups and events
 
 ## 📞 Contact Information
 
@@ -157,7 +157,7 @@ Don't wait - jump right in! Our community is most active on Discord, where you c
 
 1. **[Join Discord Now](https://discord.gg/5yvQRbd5QK)** - Start chatting immediately
 2. **[Follow Facebook](https://www.facebook.com/arosforenedefigurspillere)** - Stay updated on events
-3. **Show up Sunday** - Address and details in Discord
+3. **Connect with us** - Details and current activities in Discord
 
 **Questions?** Just ask in Discord's `#general` channel - we're here to help!
 

@@ -38,7 +38,7 @@ We foster a welcoming environment where both newcomers and veterans can:
 
 ### 🎲 Community Tools
 - **Dice Game**: Interactive browser-based dice rolling for tabletop sessions
-- **Event Calendar**: Stay updated on community events and tournaments
+- **Community Hub**: Connect with tabletop gaming enthusiasts
 - **Resource Links**: Direct links to official rules, army builders, and painting guides
 
 ## 🛠️ Technical Architecture
@@ -325,7 +325,7 @@ python -m http.server 8000
 
 - **Technical Issues**: Use the contact form on the website
 - **Community Info**: arosforenedefigurspillere@gmail.com
-- **Meeting Times**: Sundays 13:00-18:00
+- **Community**: Active tabletop gaming community in Aarhus
 - **Location**: Aarhus, Denmark
 
 ---
@@ -434,7 +434,7 @@ For technical questions about the website, please contact the web team through t
 
 - **Location**: Aarhus, Denmark
 - **Game Focus**: Tabletop Wargaming (Warhammer, Warhammer 40k, Moonstone, Warmachine, and more)
-- **Meeting Times**: Sundays 13:00-18:00
+- **Community**: Active Discord and Facebook community
 - **Skill Levels**: All levels welcome
 
 ---
