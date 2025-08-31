@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malifaux: Victorian Horror Skirmish | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Oplev Malifaux - det atmosfæriske skirmish spil sat i en twisted mirror af 1900-tallets Victorianske tid. Gothic horror, steampunk og wild west i et unikt tabletop wargame.">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Malifaux specific styles - using existing CSS variables from main stylesheet */
+        
+        .malifaux-hero {
+            background: linear-gradient(rgba(45, 52, 54, 0.8), rgba(99, 110, 114, 0.8)), 
+                        url('../assets/images/Malifaux/M4E-Art-Cornelius-Basse-Lone-Verdict.webp') center/cover;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-family: 'Cinzel', serif;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9);
+            margin-bottom: 1.5rem;
+            color: #e74c3c;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            margin-bottom: 2rem !important;
+            color: #f39c12;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+            line-height: 1.4;
+        }
+        
+        .hero-tagline {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            margin-bottom: 2.5rem;
+            color: #bdc3c7;
+            font-style: italic;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            border: 2px solid transparent;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .game-intro {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .intro-text h2 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .intro-image {
+            text-align: center;
+        }
+        
+        .intro-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .features-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .feature-card h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-section {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .faction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .faction-content {
+            padding: 2rem;
+        }
+        
+        .faction-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faction-playstyle {
+            background: var(--section-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .mechanics-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin: 3rem 0;
+        }
+        
+        .mechanic-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--border-accent);
+        }
+        
+        .mechanic-card h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .mechanic-icon {
+            font-size: 2rem;
+        }
+        
+        .lore-section {
+            background: linear-gradient(135deg, rgba(45, 52, 54, 0.1), rgba(99, 110, 114, 0.1));
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .lore-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .lore-content h2 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .lore-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .getting-started {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .starter-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+        
+        .starter-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .community-section {
+            background: var(--bg-primary);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .community-cta {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .edition-notice {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
+        }
+        
+        .edition-notice h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .edition-notice p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .intro-grid,
+            .mechanics-grid,
+            .starter-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="malifaux-hero">
+        <div class="hero-content">
+            <h1>Malifaux</h1>
+            <p class="hero-subtitle">Victorian Horror Skirmish Game</p>
+            <p class="hero-tagline">"En twisted mirror af en alternativ Jord i 1900-tallet"</p>
+            <p>
+                Træd ind i en verden af gotisk horror, victorianske strukturer, steampunk konstruktioner og wild west revolvermænd. 
+                En verden hvor undead amalgamationer, monstrøse hævngerrige apparitioner og andre skabninger boltrer sig i natten.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://www.wyrd-games.net/malifaux" target="_blank" rel="noopener noreferrer" class="cta-button">
+                    <i class="fas fa-external-link-alt"></i> Officiel Website
+                </a>
+                <a href="#fraktioner" class="cta-button">
+                    <i class="fas fa-users"></i> Udforsk Fraktioner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edition Notice -->
+    <section class="container">
+        <div class="edition-notice">
+            <h3><i class="fas fa-star"></i> Malifaux Fourth Edition (M4E) er her!</h3>
+            <p>Den nyeste version af Malifaux er nu i open beta. Oplev de opdaterede regler og nye muligheder i dette elskede skirmish spil.</p>
+        </div>
+    </section>
+
+    <!-- Game Introduction -->
+    <section class="game-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2>Hvad er Malifaux?</h2>
+                    <p>
+                        Malifaux er et story-drevet skirmish miniature spil, hvor to spillere kæmper om kontrollen over byer, 
+                        bosættelser og magtcentre i denne farlige nye verden. Spillet kombinerer gotisk horror med victorian steampunk 
+                        og wild west elementer i et unikt og atmosfærisk univers.
+                    </p>
+                    <p>
+                        Soulstones dybt inde i de hule katakomber er mere værd end det sved og blod, det koster at skaffe dem. 
+                        Dette har tiltrukket de magtfulde, desperate, ambitiøse og snedige til Malifaux fra Jorden.
+                    </p>
+                    <p>
+                        Med et strømlinet hiring system, opdaterede regler der ikke kommer i vejen for sjoven, 
+                        og strategisk dybde nok til at holde hjernen i gang i årevis, har det aldrig været et bedre tidspunkt at dykke ind.
+                    </p>
+                </div>
+                <div class="intro-image">
+                    <img src="../assets/images/Malifaux/M4E-Logo_White-2.webp" alt="Malifaux Fourth Edition Logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Hvad gør Malifaux særligt?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🃏</div>
+                    <h3>Fate Deck System</h3>
+                    <p>Bruger et kortdæk i stedet for terninger til chance og luck. Dette giver mere kontrol og taktiske muligheder i dine handlinger.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Skirmish Gameplay</h3>
+                    <p>Mindre hære (typisk 5-10 modeller) betyder dybere taktik og hver model har betydning for udfaldet af kampen.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Story-Driven</h3>
+                    <p>Hvert spil fortæller en historie, og karakterernes baggrund og personligheder er direkte implementeret i deres spillemekanikker.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Schemes & Strategies</h3>
+                    <p>Varierende mål i hver kamp sikrer, at ingen to spil er ens. Victory Points opnås gennem taktisk spil, ikke bare elimination.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌗</div>
+                    <h3>Unique Atmosphere</h3>
+                    <p>En blanding af Victorian horror, steampunk teknologi og wild west mystik skaber en unik og fængslende spilleverden.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎲</div>
+                    <h3>Ressource Management</h3>
+                    <p>Soulstones og kortmanipulation tilføjer et ekstra lag af strategi og timing til dine beslutninger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Mechanics -->
+    <section class="mechanics-section">
+        <div class="container">
+            <h2 class="section-title">Kernemekanikker</h2>
+            <div class="mechanics-grid">
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">🃏</span> Fate Deck</h3>
+                    <p>
+                        I stedet for terninger bruger Malifaux et standard kortdæk (54 kort inklusive 2 jokere). 
+                        Dette giver spillerne mulighed for at "cheat fate" ved at bytte kort fra deres hånd, 
+                        hvilket tilføjer et strategisk element til hver handling.
+                    </p>
+                    <ul>
+                        <li>Røde og sorte jokere for kritiske succeser og fiasko</li>
+                        <li>Hand management bliver afgørende</li>
+                        <li>Mindre tilfældighed, mere taktik</li>
+                    </ul>
+                </div>
+                
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">💎</span> Soulstones</h3>
+                    <p>
+                        Soulstones er den præcieuse valuta i Malifaux's verden og fungerer som en ressource i spillet. 
+                        De kan bruges til at modificere dice flips og give dine modeller ekstra kraft når det er mest nødvendigt.
+                    </p>
+                    <ul>
+                        <li>Modificerer flip results</li>
+                        <li>Aktiverer specielle abilities</li>
+                        <li>Begrænset ressource - brug dem klogt!</li>
+                    </ul>
+                </div>
+                
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">🎯</span> Activation System</h3>
+                    <p>
+                        Spillere skiftes til at aktivere deres modeller en ad gangen, hvilket skaber intense taktiske situationer 
+                        hvor timing og position er alt. Hver model har sine egne handlinger og AP (Action Points).
+                    </p>
+                    <ul>
+                        <li>Alternerende aktivering</li>
+                        <li>2 Action Points per model</li>
+                        <li>Forskellige handlingstyper</li>
+                    </ul>
+                </div>
+                
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">🏆</span> Victory Points</h3>
+                    <p>
+                        Victory opnås gennem at fuldføre Schemes og Strategies, ikke kun ved at eliminere fjender. 
+                        Dette skaber varierede og spændende scenarier hvor taktik og positionering er vigtigere end rå kraft.
+                    </p>
+                    <ul>
+                        <li>Strategies: Primære mål for begge spillere</li>
+                        <li>Schemes: Hemmelige sekundære mål</li>
+                        <li>Forskelligartede victory conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Factions -->
+    <section id="fraktioner" class="faction-section">
+        <div class="container">
+            <h2 class="section-title">Fraktioner i Malifaux</h2>
+            <p class="section-description">
+                Hver fraktion i Malifaux har sin egen unikke spillestil, lore og tilgang til konflikten om kontrollen over Malifaux City. 
+                Vælg din fraktion baseret på den spillestil og det tema, der appellerer mest til dig.
+            </p>
+            
+            <div class="faction-grid">
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_4.23.2025_Art-Witchling-Stalker.webp" alt="Guild Witchling Stalker" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Guild</h3>
+                        <p class="faction-description">
+                            Guilden kontrollerer Breach'en og er en dominerende magt i Malifaux City. De kæmper for lov og orden 
+                            med jernhård disciplin, men deres metoder er ofte brutale og undertrykkende.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Kontrol, range combat, og order gennem jernhård disciplin
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_6.4.2025_Art-Academic.webp" alt="Arcanist Academic" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Arcanists</h3>
+                        <p class="faction-description">
+                            Arcanisterne udfordrer Guildens autoritet gennem sabotage og magisk dygtighed. De kæmper for magisk frihed 
+                            og mod Guildens undertrykkelse af de magisk begavede.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Magical manipulation, elemental forces, og guerrilla tactics
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_5.14.2025_Redchapel-Art.webp" alt="Resurrectionist Redchapel" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Resurrectionists</h3>
+                        <p class="faction-description">
+                            De skrækindjagende Resurrectionister kontrollerer horder af de døde. De ser døden som blot en ny begyndelse 
+                            og bruger necromancy til at oprejse armeer af undead væsener.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Summoning, undead hordes, og death magic
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_5.7.2025_Woe-Art.webp" alt="Neverborn Woe" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Neverborn</h3>
+                        <p class="faction-description">
+                            De oprindelige indbyggere i Malifaux, Neverborn, vil ikke let overlade deres land til hvad de ser som fremmede invasorer. 
+                            De repræsenterer naturens vrede og Malifaux's egne mørke kræfter.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Horror themes, psychological warfare, og native Malifaux magic
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_5.21.2025_Infamous-Art.webp" alt="Outcast Infamous" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Outcasts</h3>
+                        <p class="faction-description">
+                            En løs samling af lejesoldater og andre ne'er-do-wells, Outcasts sælger deres tjenester til højestbydende 
+                            når de ikke forfølger deres egne individuelle mål.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Versatile mercenaries, independent operators, og diverse tactics
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/WW_6.11.2025_Art-Tricksy.webp" alt="Bayou Tricksy" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Bayou (Gremlins)</h3>
+                        <p class="faction-description">
+                            Gremlins fra Bayou'en er blevet ret magtfulde ved at lære fra og efterligne de mennesker, 
+                            der overtog kontrollen over Malifaux City. De er uforudsigelige og ofte farligt komiske.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Chaotic tactics, explosive weapons, og unpredictable abilities
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/M4E-Art-Dead-Doxy.webp" alt="Ten Thunders" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Ten Thunders</h3>
+                        <p class="faction-description">
+                            Det mystiske Ten Thunders kriminalsyndikat arbejder fra skyggerne for at udvide sin indflydelse gennem hele byen. 
+                            De opererer med østasiatisk filosofi og kampsport.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Martial arts, infiltration, og shadow operations
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/Malifaux/M4E-Art-Iron-Wing.webp" alt="Explorer's Society" class="faction-image">
+                    <div class="faction-content">
+                        <h3>Explorer's Society</h3>
+                        <p class="faction-description">
+                            En nyere tilføjelse til Malifaux, Explorer's Society består af eventyrere, forskere og opdagelsesrejsende 
+                            der søger at udforske og forstå Malifaux's hemmeligheder.
+                        </p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Exploration, research, og adaptable strategies
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lore Section -->
+    <section class="lore-section">
+        <div class="container">
+            <div class="lore-content">
+                <h2>Malifaux's Verden</h2>
+                <p class="lore-text">
+                    "Malifaux, et twisted mirror af en alternativ Jord i 1900-tallet; en verden af gotisk horror, 
+                    victorianske strukturer, steampunk konstruktioner og wild west revolvermænd. 
+                    Fyldt med undead amalgamationer, monstrøse hævngerrige apparitioner og andre væsener der boltrer sig i natten..."
+                </p>
+                <p class="lore-text">
+                    Malifaux blev første gang åbnet for menneskeheden da The Breach blev opdaget - en portal mellem Jorden og denne mystiske verden. 
+                    Den lure af Malifaux's værdifulde Soulstones har bragt de magtfulde, desperate, ambitiøse og snedige til denne nye verden.
+                </p>
+                <p class="lore-text">
+                    Guildens kontrol af Breach'en sikrer, at den forbliver en dominerende magt i Malifaux City, 
+                    men den udfordres på alle sider af sabotage og magisk dygtighed fra Arcanisterne og de shuffling undead der tjener de fæle Resurrectionister.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section class="getting-started">
+        <div class="container">
+            <h2 class="section-title">Kom i Gang med Malifaux</h2>
+            <div class="starter-grid">
+                <div class="starter-image">
+                    <img src="../assets/images/Malifaux/M3E-Logo_White-2.webp" alt="Malifaux Starter">
+                </div>
+                <div class="starter-content">
+                    <h3>Hvad skal du bruge?</h3>
+                    <ul>
+                        <li><strong>Grundregler:</strong> Gratis download fra Wyrd Games' hjemmeside</li>
+                        <li><strong>Miniatures:</strong> Vælg en Crew Box fra din favorit fraktion</li>
+                        <li><strong>Fate Deck:</strong> Et standard kortdæk eller special Malifaux deck</li>
+                        <li><strong>Stat Cards:</strong> Til dine modeller (gratis download)</li>
+                        <li><strong>Målebånd:</strong> Til afstande og movement</li>
+                        <li><strong>Terrain:</strong> For at skabe interessante battlefields</li>
+                        <li><strong>Counters/Tokens:</strong> Til at holde styr på spileffekter</li>
+                    </ul>
+                    <h3>Begynder Tips</h3>
+                    <ul>
+                        <li>Start med en Core Box fra din valgte fraktion</li>
+                        <li>Lær grundreglerne med simple crew builds</li>
+                        <li>Prøv forskellige Schemes & Strategies</li>
+                        <li>Fokuser på at forstå dine modellers special abilities</li>
+                        <li>Øv hand management med dit Fate Deck</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="container">
+            <h2 class="section-title">Bliv en del af Malifaux communityet</h2>
+            <div class="community-cta">
+                <h3><i class="fas fa-users"></i> Spil Malifaux med Aros Forenede Figurspillere</h3>
+                <p>
+                    Kom og oplev dette fantastiske skirmish spil sammen med vores erfarne spillere. 
+                    Vi hjælper gerne nye spillere i gang og har regelmæssige spil sessions.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://discord.gg/5yvQRbd5QK" target="_blank" rel="noopener noreferrer" class="cta-button">
+                        <i class="fab fa-discord"></i> Hop på Discord
+                    </a>
+                    <a href="#kontakt" class="cta-button">
+                        <i class="fas fa-envelope"></i> Kontakt Os
+                    </a>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h4>Hvad vi tilbyder:</h4>
+                    <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                        <li>Hjælp til nye spillere og reglæring</li>
+                        <li>Regelmæssige Malifaux spil sessions</li>
+                        <li>Deltagelse i turneringer og events</li>
+                        <li>Crew building råd og strategier</li>
+                        <li>Painting og modeling tips</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
+</body>
+</html>
