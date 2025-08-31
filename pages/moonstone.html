@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonstone: Fairytale Fantasy Skirmish | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Oplev Moonstone - det prisbelønnede fantasy skirmish spil. Unikke kortmekanikker, fairytale-inspirerede karakterer og strategisk kamp om værdifulde moonstones.">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Moonstone specific styles - using existing CSS variables from main stylesheet */
+        
+        .moonstone-hero {
+            background: linear-gradient(rgba(75, 0, 130, 0.8), rgba(25, 25, 112, 0.8)), 
+                        url('../assets/images/moonstone/Moonstone-Award-Winning-Fantasy-Skirmish-Game-2.webp') center/cover;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-family: 'Cinzel', serif;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9);
+            margin-bottom: 1.5rem;
+            color: #E6E6FA;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            margin-bottom: 2rem !important;
+            color: #DDA0DD;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+            line-height: 1.4;
+        }
+        
+        .hero-tagline {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            margin-bottom: 2.5rem;
+            color: #F0E68C;
+            font-style: italic;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #8A2BE2, #9370DB);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            border: 2px solid transparent;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .game-intro {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .intro-text h2 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .intro-image {
+            text-align: center;
+        }
+        
+        .intro-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .features-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .feature-card h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-section {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .faction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .faction-content {
+            padding: 2rem;
+        }
+        
+        .faction-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faction-playstyle {
+            background: var(--section-bg-alt);
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .mechanics-section {
+            padding: 4rem 0;
+            background: var(--bg-primary);
+        }
+        
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin: 3rem 0;
+        }
+        
+        .mechanic-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--border-accent);
+        }
+        
+        .mechanic-card h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .mechanic-icon {
+            font-size: 2rem;
+        }
+        
+        .lore-section {
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.1), rgba(25, 25, 112, 0.1));
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .lore-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .lore-content h2 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .lore-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .getting-started {
+            background: var(--section-bg-alt);
+            padding: 4rem 0;
+        }
+        
+        .starter-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+        
+        .starter-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .starter-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .starter-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .starter-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .starter-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-check {
+            color: var(--color-success);
+            font-weight: bold;
+        }
+        
+        .community-section {
+            background: var(--bg-primary);
+            padding: 4rem 0;
+        }
+        
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .community-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .community-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .community-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .community-card h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .community-link {
+            display: inline-block;
+            margin-top: 1rem;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .community-link:hover {
+            background: var(--color-secondary);
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .intro-grid, .mechanics-grid, .starter-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation loaded dynamically -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="moonstone-hero">
+        <div class="hero-content">
+            <h1>🌙 Moonstone</h1>
+            <p class="hero-subtitle">Fairytale Fantasy Skirmish</p>
+            <p class="hero-tagline">"Det prisbelønnede fantasy skirmish spil med unikke kortmekanikker"</p>
+            <div class="cta-buttons">
+                <a href="#fraktioner" class="cta-button">🏰 Udforsk Fraktioner</a>
+                <a href="#kom-i-gang" class="cta-button">🎲 Kom i Gang</a>
+                <a href="https://www.moonstonethegame.com/" target="_blank" rel="noopener noreferrer" class="cta-button">🌐 Officiel Hjemmeside</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Introduction -->
+    <section class="game-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2>Hvad er Moonstone?</h2>
+                    <p>Moonstone er et prisbelønnet fantasy skirmish spil for 2-4 spillere, hvor du leder fairytale-inspirerede karakterer i jagten på værdifulde Moonstones. Spillet bruger unikke kortmekanikker, hvor spillere forudsiger, vildleder og bluffe deres vej til sejr.</p>
+                    
+                    <p>Kronet som både <strong>Best Miniatures Range</strong> og <strong>Best Miniatures Rules</strong> i både Judge's Choice og Public Vote på UK Games Expo '23!</p>
+                    
+                    <p>Hver spiller vælger 4-6 smukt udformet miniatures med unikke evner til at kæmpe på et 3' x 3' bræt og forsøge at sikre så mange Moonstones som muligt.</p>
+                </div>
+                <div class="intro-image">
+                    <img src="../assets/images/moonstone/Moonstone-Game.webp" alt="Moonstone Spil Oversigt">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">🎯 Unikke Spil Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🃏</div>
+                    <h3>Kort-baseret Kamp</h3>
+                    <p>I stedet for terninger bruger Moonstone kortdæk til at løse magiske evner og nærkamp. Begge spillere trækker kort og forsøger at overspille hinanden gennem gætning og bluffing.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Bluff & Vildledning</h3>
+                    <p>Spillere kan lyve om deres trukne kort for at aktivere evner eller deliberat fejle. Modstanderen skal beslutte om de taler sandt og enten kalde deres bluff eller lade det passere.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Dynamisk Melee</h3>
+                    <p>Melee-kort har 'defensive' og 'aggressive' sider. En Rising Attack kan gennembryde en High Guard, men en Low Guard beskytter perfekt og efterlader angriberen bedøvet!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Fairytale Karakterer</h3>
+                    <p>Fra fladulente pugriddere til en guddom ved navn Gary - Moonstone er fyldt med charmerende og morsomme karakterer inspireret af fairytales og folklore.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Factions Section -->
+    <section id="fraktioner" class="faction-section">
+        <div class="container">
+            <h2 class="section-title">🏰 Fraktioner i Tauber</h2>
+            <p class="section-subtitle">Vælg din side i kampen om Moonstones</p>
+            
+            <div class="faction-grid">
+                <div class="faction-card">
+                    <img src="../assets/images/moonstone/Moonstone-Commonwealth-Humans-2.webp" alt="Commonwealth" class="faction-image">
+                    <div class="faction-content">
+                        <h3>🌞 Commonwealth</h3>
+                        <p class="faction-description">Den største fraktion på Tauber, primært bestående af mennesker, gnomer og giganter. Commonwealth blev dannet af modstandskæmpere, der var trætte af den dårlige behandling under den Glemte Konge.</p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Brute force tilgang med høje grundstatistikker. Kan udholde modstandere eller overgå dem i nærkamp.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/moonstone/Moonstone-Dominion-Goblins-2.webp" alt="Dominion" class="faction-image">
+                    <div class="faction-content">
+                        <h3>🌙 Dominion</h3>
+                        <p class="faction-description">Dannet af Goblin Kongen og Diana, Fé Dronningen, sammen med Duchess Noravia de Faulte. De adopterede månen som deres ikon for at afspejle deres opposition til Commonwealth.</p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Snedighed og underhåndstricks. Bedre evade stats og mere energi, men mere skrøbelige. Mestre i unfair kamp!
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/moonstone/Moonstone-Leshavult-Fauns.webp" alt="Leshavult" class="faction-image">
+                    <div class="faction-content">
+                        <h3>🌿 Leshavult</h3>
+                        <p class="faction-description">Tilbedere af naturguddommen Leshavit. En farverig samling af individer der favoriserer deres simple måder at leve på forbundet med naturen.</p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Fokus på synergier og kombos. Fauns og dyr er hurtige og energiske, mens spirits og kultister spiller et langsommere, metodisk spil.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faction-card">
+                    <img src="../assets/images/moonstone/Moonstone-Shades-Risen-2.webp" alt="Shades" class="faction-image">
+                    <div class="faction-content">
+                        <h3>👻 Shades of Moonreach</h3>
+                        <p class="faction-description">Engang troede man, at de var tabt til tiden, men Shades lurer nu i forladte byer. Mange frygter, at tiden med fred, velstand og ubegrænset teacakes nærmer sig sin ende...</p>
+                        <div class="faction-playstyle">
+                            <strong>Spillestil:</strong> Mystiske og uhyggelige evner med fokus på disruption og manipulation af både fjender og spilbrættet selv.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Mechanics -->
+    <section class="mechanics-section">
+        <div class="container">
+            <h2 class="section-title">⚙️ Spilmekanikker</h2>
+            
+            <div class="mechanics-grid">
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">🃏</span> Arcane Deck</h3>
+                    <p>Til magiske evner bruger spillere et dæk med nummererede og farvede kort samt katastrofe kort. En spiller forsøger at ramme et bestemt nummer og/eller farve på den evne, de løser.</p>
+                    <p><strong>Bluff-element:</strong> Spillere kan lyve om deres kort for at aktivere evner, men modstanderen kan kalde bluffet med potentielt katastrofale konsekvenser!</p>
+                </div>
+                
+                <div class="mechanic-card">
+                    <h3><span class="mechanic-icon">⚔️</span> Melee Deck</h3>
+                    <p>Begge spillere bruger et delt dæk med 'defensive' og 'aggressive' kort. Disse modsatrettede kort kan forårsage skade, blokere angreb eller endda få begge karakterer dræbt!</p>
+                    <p><strong>Taktisk dybde:</strong> En Rising Attack rammer lavt, så en High Guard efterlader målet sårbart, men en Low Guard beskytter perfekt og bedøver angriberen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lore Section -->
+    <section class="lore-section">
+        <div class="container">
+            <div class="lore-content">
+                <h2>🏝️ Verdenen Tauber</h2>
+                <p class="lore-text">Moonstone finder sted på øen Tauber, en mytisk ø af fantasy og fairytale, hvor mennesker, goblins, feer, gnomer, giganter, fauns, trolde, havfolk og mange flere alle trives under den gyldne sol og perleagtige måner.</p>
+                
+                <p class="lore-text">Når månerne skinner klart på en klar nat, dukker moonstonene op. De spirer op af jorden som så mange krystallinske paddehatte - både mystiske og værdifulde. Troldmændene ved Grommels Tårn tilbyder en fin sum guld for enhver moonstone, der bringes til dem intakt.</p>
+                
+                <p class="lore-text">Problemet er imidlertid, at så snart det blændende sollys rører dem, forsvinder moonstonene som om de ikke var andet end støv...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section id="kom-i-gang" class="getting-started">
+        <div class="container">
+            <h2 class="section-title">🚀 Kom i Gang med Moonstone</h2>
+            
+            <div class="starter-grid">
+                <div class="starter-image">
+                    <img src="../assets/images/moonstone/troupe-human.webp" alt="Moonstone Starter Set">
+                </div>
+                <div class="starter-content">
+                    <h3>2-Player Starter Set</h3>
+                    <p>Det perfekte indgangspunkt til spillet med alt hvad du skal bruge for at spille, inkludert terninger, tokens, kort, regler, målebånd og modeller.</p>
+                    
+                    <ul class="starter-features">
+                        <li><span class="feature-check">✓</span> En Dominion troupe (4 miniatures)</li>
+                        <li><span class="feature-check">✓</span> En Commonwealth troupe (4 miniatures)</li>
+                        <li><span class="feature-check">✓</span> Komplet regelbog med lore</li>
+                        <li><span class="feature-check">✓</span> Arcane & Melee kortdæk</li>
+                        <li><span class="feature-check">✓</span> Terninger, tokens og målebånd</li>
+                        <li><span class="feature-check">✓</span> Alt klar til at spille med det samme!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="container">
+            <h2 class="section-title">🌐 Moonstone Fællesskab</h2>
+            <p class="section-subtitle">Bliv en del af det globale Moonstone fællesskab</p>
+            
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-icon">💬</div>
+                    <h3>Discord Server</h3>
+                    <p>Chat med andre spillere, få taktiske råd og vær først til at høre om nyheder.</p>
+                    <a href="https://discord.gg/8axsWfAF3R" target="_blank" rel="noopener noreferrer" class="community-link">Join Discord</a>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">📘</div>
+                    <h3>Facebook Gruppe</h3>
+                    <p>Del dine painted miniatures og bliv inspireret af fællesskabets kreativitet.</p>
+                    <a href="https://www.facebook.com/moonstonethegame" target="_blank" rel="noopener noreferrer" class="community-link">Facebook</a>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">🎥</div>
+                    <h3>YouTube Kanal</h3>
+                    <p>Se tutorials, battle reports og lær strategier fra erfarne spillere.</p>
+                    <a href="https://www.youtube.com/@Moonstonegame" target="_blank" rel="noopener noreferrer" class="community-link">YouTube</a>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">🛒</div>
+                    <h3>Officiel Shop</h3>
+                    <p>Køb miniatures, starter sets og accessories direkte fra Goblin King Games.</p>
+                    <a href="https://shop.moonstonethegame.com/" target="_blank" rel="noopener noreferrer" class="community-link">Shop Nu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Community Section -->
+    <section class="community-section" style="background: var(--section-bg-alt);">
+        <div class="container">
+            <h2 class="section-title">🎲 Spil Moonstone hos AFF</h2>
+            <p class="section-subtitle">Bliv en del af vores lokale Moonstone fællesskab i Aarhus</p>
+            
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h3>Månedlige Spilaftener</h3>
+                    <p>Vi holder regelmæssige Moonstone spilaftener, hvor både nye og erfarne spillere er velkomne. Her kan du lære spillet, prøve forskellige fraktioner og deltage i venskabelige kampe.</p>
+                    
+                    <p><strong>Hvad vi tilbyder:</strong></p>
+                    <ul class="starter-features">
+                        <li><span class="feature-check">✓</span> Demo games for nye spillere</li>
+                        <li><span class="feature-check">✓</span> Låneminiatures til begyndere</li>
+                        <li><span class="feature-check">✓</span> Painting workshops</li>
+                        <li><span class="feature-check">✓</span> Taktik diskussioner</li>
+                        <li><span class="feature-check">✓</span> Turnering forberedelse</li>
+                    </ul>
+                    
+                    <div class="cta-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                        <a href="../index.html#kontakt" class="cta-button">📧 Kontakt Os</a>
+                        <a href="https://discord.gg/5yvQRbd5QK" target="_blank" rel="noopener noreferrer" class="cta-button">💬 Discord</a>
+                    </div>
+                </div>
+                <div class="intro-image">
+                    <img src="../assets/images/moonstone/troupe-faeries.webp" alt="AFF Moonstone Spilaften">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts loaded dynamically -->
+    <div id="scripts-container"></div>
+
+    <script>
+        // Load common components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load head elements
+            fetch('../includes/head-subpages.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('head-container').innerHTML = data;
+                });
+
+            // Load navigation
+            fetch('../includes/navigation-subpages.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navigation-container').innerHTML = data;
+                    // Initialize navigation after loading
+                    if (typeof initializeNavigation === 'function') {
+                        initializeNavigation();
+                    }
+                });
+
+            // Load footer
+            fetch('../includes/footer-subpages.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+
+            // Load scripts
+            fetch('../includes/scripts-subpages.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('scripts-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
