@@ -84,8 +84,29 @@ class ComponentLoader {
 
         if (hamburger && navMenu) {
             hamburger.addEventListener('click', () => {
+                const isActive = hamburger.classList.contains('active');
+                
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
+                
+                // Toggle body scroll prevention on mobile
+                if (window.innerWidth <= 768) {
+                    if (!isActive) {
+                        // Menu is opening - prevent body scroll
+                        document.body.classList.add('nav-open');
+                        // Store current scroll position
+                        document.body.dataset.scrollY = window.scrollY;
+                        document.body.style.top = `-${window.scrollY}px`;
+                    } else {
+                        // Menu is closing - restore body scroll
+                        document.body.classList.remove('nav-open');
+                        document.body.style.top = '';
+                        // Restore scroll position
+                        const scrollY = parseInt(document.body.dataset.scrollY || '0');
+                        window.scrollTo(0, scrollY);
+                        delete document.body.dataset.scrollY;
+                    }
+                }
             });
         }
 
@@ -100,6 +121,16 @@ class ComponentLoader {
                 if (!link.classList.contains('dropdown-toggle')) {
                     hamburger?.classList.remove('active');
                     navMenu?.classList.remove('active');
+                    
+                    // Restore body scroll on mobile
+                    if (window.innerWidth <= 768 && document.body.classList.contains('nav-open')) {
+                        document.body.classList.remove('nav-open');
+                        document.body.style.top = '';
+                        // Restore scroll position
+                        const scrollY = parseInt(document.body.dataset.scrollY || '0');
+                        window.scrollTo(0, scrollY);
+                        delete document.body.dataset.scrollY;
+                    }
                 }
             });
         });
@@ -109,6 +140,27 @@ class ComponentLoader {
         
         // Initialize theme toggle after navigation is loaded
         this.initializeThemeToggle();
+        
+        // Handle window resize to clean up mobile menu state
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                // Desktop view - clean up mobile menu state
+                const hamburger = document.getElementById('hamburger');
+                const navMenu = document.getElementById('nav-menu');
+                
+                if (hamburger && navMenu) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+                
+                // Restore body scroll if it was prevented
+                if (document.body.classList.contains('nav-open')) {
+                    document.body.classList.remove('nav-open');
+                    document.body.style.top = '';
+                    delete document.body.dataset.scrollY;
+                }
+            }
+        });
     }
 
     static initializeThemeToggle() {
@@ -260,6 +312,16 @@ class ComponentLoader {
                         dropdown.classList.remove('active');
                         document.getElementById('hamburger')?.classList.remove('active');
                         document.getElementById('nav-menu')?.classList.remove('active');
+                        
+                        // Restore body scroll on mobile
+                        if (window.innerWidth <= 768 && document.body.classList.contains('nav-open')) {
+                            document.body.classList.remove('nav-open');
+                            document.body.style.top = '';
+                            // Restore scroll position
+                            const scrollY = parseInt(document.body.dataset.scrollY || '0');
+                            window.scrollTo(0, scrollY);
+                            delete document.body.dataset.scrollY;
+                        }
                     });
                 });
             }

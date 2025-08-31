@@ -1286,6 +1286,13 @@ h1, h2, h3, h4, h5, h6 {
         padding-top: 77px !important; /* Match exact navbar height for mobile */
     }
     
+    /* Prevent body scroll when mobile menu is open */
+    body.nav-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+    
     .hamburger {
         display: flex;
     }
@@ -1297,9 +1304,12 @@ h1, h2, h3, h4, h5, h6 {
         flex-direction: column;
         background-color: rgba(44, 62, 80, 0.98);
         width: 100%;
+        height: calc(100vh - 70px);
         text-align: center;
         transition: 0.3s;
         padding: 2rem 0;
+        overflow-y: auto;
+        z-index: 999;
     }
     
     .nav-menu.active {
