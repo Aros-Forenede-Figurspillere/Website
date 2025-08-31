@@ -147,7 +147,8 @@
     margin-top: 2rem;
 }
 
-.btn {
+/* Legacy button styles - only apply to buttons without specific classes */
+.btn:not(.btn-primary):not(.btn-secondary):not(.btn-light):not(.btn-dark):not(.btn-hero):not(.btn-email) {
     background: rgba(255, 255, 255, 0.2);
     color: white;
     padding: 1rem 2rem;
@@ -159,7 +160,7 @@
     backdrop-filter: blur(10px);
 }
 
-.btn:hover {
+.btn:not(.btn-primary):not(.btn-secondary):not(.btn-light):not(.btn-dark):not(.btn-hero):not(.btn-email):hover {
     background: var(--bg-secondary);
     color: var(--color-primary);
     transform: translateY(-2px);

@@ -194,16 +194,31 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
     border: none;
     font-size: 14px;
+    text-align: center;
 }
 
 .btn-primary {
     background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
     color: var(--text-inverse);
+    border: 2px solid transparent;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+    color: var(--text-inverse);
+    text-decoration: none;
+}
+
+.btn-primary:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    color: var(--text-inverse);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
 }
 
 .btn-secondary {
@@ -216,6 +231,74 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--color-primary);
     color: var(--text-inverse);
     transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Theme-aware button variants */
+.btn-light {
+    background: var(--color-secondary);
+    color: var(--text-inverse);
+    border: 2px solid var(--color-secondary);
+    box-shadow: var(--shadow-light);
+}
+
+.btn-light:hover {
+    background: var(--color-secondary-light);
+    color: var(--text-inverse);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    text-decoration: none;
+}
+
+.btn-dark {
+    background: var(--color-secondary);
+    color: var(--text-inverse);
+    border: 2px solid var(--color-secondary);
+}
+
+.btn-dark:hover {
+    background: var(--color-secondary-light);
+    color: var(--text-inverse);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Email button as a specialized version */
+.btn-email {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: var(--color-primary);
+    color: var(--text-inverse);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-medium);
+    border: 2px solid var(--color-primary);
+    min-width: 280px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.btn-email:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+    color: var(--text-inverse);
+    text-decoration: none;
+}
+
+.btn-email:visited,
+.btn-email:focus,
+.btn-email:active {
+    color: var(--text-inverse);
+    text-decoration: none;
 }
 
 /* Navigation */
@@ -1020,32 +1103,53 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
-.email-button {
+.btn-email i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.btn-email span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hero section buttons */
+.btn-hero {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 15px 30px;
+    font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
-    background: linear-gradient(45deg, var(--accent-color), #c0392b);
-    color: white;
-    text-decoration: none;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 1rem;
+    gap: 10px;
     transition: all 0.3s ease;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-}
-
-.email-button:hover {
-    background: linear-gradient(45deg, #c0392b, #a93226);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-    color: white;
     text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
-.email-button i {
-    font-size: 1.2rem;
+.btn-hero:hover {
+    background: white;
+    color: var(--color-secondary);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.btn-hero.discord:hover {
+    color: #7289da;
+}
+
+.btn-hero.facebook:hover {
+    color: #4267B2;
+}
+
+.btn-hero i {
+    font-size: 1.3rem;
 }
 
 .email-note {
@@ -1571,5 +1675,52 @@ textarea:focus {
     .section-title {
         color: black;
         page-break-after: avoid;
+    }
+}
+
+/* Mobile responsiveness for buttons */
+@media (max-width: 768px) {
+    .btn {
+        padding: 10px 25px;
+        font-size: 13px;
+    }
+    
+    .btn-hero {
+        padding: 12px 25px;
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .btn-email {
+        min-width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-email span {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+    
+    .btn-hero {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-email {
+        padding: 0.9rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn-email span {
+        font-size: 0.85rem;
     }
 }
