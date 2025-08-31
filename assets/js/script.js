@@ -323,14 +323,8 @@ class ThemeManager {
         // Apply initial theme
         this.applyTheme(this.theme);
         
-        // Set up theme toggle button
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            console.log('🎨 ThemeManager: Theme toggle button found, adding click listener');
-            themeToggle.addEventListener('click', () => this.toggleTheme());
-        } else {
-            console.warn('🎨 ThemeManager: Theme toggle button NOT found! Check if element with id="themeToggle" exists');
-        }
+        // Try to connect theme toggle button
+        this.connectThemeToggle();
         
         // Listen for system theme changes
         if (window.matchMedia) {
@@ -344,6 +338,23 @@ class ThemeManager {
         }
         
         console.log('🎨 ThemeManager: Initialization complete!');
+    }
+
+    connectThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            console.log('🎨 ThemeManager: Theme toggle button found, adding click listener');
+            
+            // Remove any existing event listeners to avoid duplicates
+            themeToggle.replaceWith(themeToggle.cloneNode(true));
+            const newThemeToggle = document.getElementById('themeToggle');
+            
+            newThemeToggle.addEventListener('click', () => this.toggleTheme());
+            return true;
+        } else {
+            console.warn('🎨 ThemeManager: Theme toggle button NOT found! Check if element with id="themeToggle" exists');
+            return false;
+        }
     }
 
     getSystemTheme() {
@@ -434,9 +445,40 @@ class ThemeManager {
     }
 }
 
-// Initialize theme manager when DOM is loaded
+// Make ThemeManager globally accessible
+window.ThemeManager = ThemeManager;
+
+// Initialize theme manager immediately (not waiting for DOM)
+try {
+    if (!window.themeManager) {
+        console.log('🎨 Script.js: Creating ThemeManager instance...');
+        window.themeManager = new ThemeManager();
+        console.log('🎨 Script.js: ThemeManager created successfully');
+    }
+
+    // Dispatch custom event to notify that ThemeManager is ready
+    console.log('🎨 Script.js: Dispatching themeManagerReady event...');
+    window.dispatchEvent(new CustomEvent('themeManagerReady', { 
+        detail: { themeManager: window.themeManager } 
+    }));
+    console.log('🎨 Script.js: themeManagerReady event dispatched');
+} catch (error) {
+    console.error('🎨 Script.js: Error initializing ThemeManager:', error);
+}
+
+// Also initialize when DOM is loaded for backward compatibility
 document.addEventListener('DOMContentLoaded', function() {
-    window.themeManager = new ThemeManager();
+    if (!window.themeManager) {
+        console.log('🎨 DOM loaded, initializing ThemeManager...');
+        window.themeManager = new ThemeManager();
+    } else {
+        console.log('🎨 DOM loaded, ThemeManager already exists');
+        // Try to reconnect the theme toggle if it exists now
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            window.themeManager.connectThemeToggle();
+        }
+    }
 });
 
 // Mobile Navigation Toggle
@@ -518,47 +560,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 });
-
-// Contact form handling
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Basic validation
-            if (!name || !email || !message) {
-                showNotification('Udfyld venligst alle felter', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showNotification('Indtast venligst en gyldig email adresse', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            showNotification('Tak for din besked! Vi kontakter dig snarest.', 'success');
-            contactForm.reset();
-            
-            // In a real implementation, you would send the data to a server
-            // For GitHub Pages, you might want to use a service like Formspree or Netlify Forms
-        });
-    }
-});
-
-// Email validation function
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
 
 // Notification system
 function showNotification(message, type = 'info') {

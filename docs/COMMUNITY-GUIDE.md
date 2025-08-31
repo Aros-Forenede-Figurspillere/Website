@@ -122,7 +122,7 @@ Welcome to Aros Forenede Figurspillere! We're excited to have you join our table
 ### Primary Contact Methods
 1. **Discord**: [discord.gg/5yvQRbd5QK](https://discord.gg/5yvQRbd5QK) *(Fastest response)*
 2. **Facebook**: [facebook.com/arosforenedefigurspillere](https://www.facebook.com/arosforenedefigurspillere)
-3. **Email**: info@arosff.dk *(For official matters)*
+3. **Email**: arosforenedefigurspillere@gmail.com *(For official matters)*
 
 ### Club Leadership
 Contact club officers through Discord for:

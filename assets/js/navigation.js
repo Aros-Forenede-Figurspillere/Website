@@ -75,7 +75,9 @@ class ComponentLoader {
 
     static async loadScripts(containerId, isSubpage = false) {
         const scriptsFile = isSubpage ? '../includes/scripts-subpages.html' : 'includes/scripts-main.html';
+        console.log(`🔧 Navigation: Loading scripts from ${scriptsFile}`);
         await this.loadComponent(containerId, scriptsFile);
+        console.log(`🔧 Navigation: Scripts loaded from ${scriptsFile}`);
     }
 
     static initializeNavigation() {
@@ -107,6 +109,121 @@ class ComponentLoader {
 
         // Set active navigation item based on current page
         this.setActiveNavItem();
+        
+        // Initialize theme toggle after navigation is loaded
+        this.initializeThemeToggle();
+    }
+
+    static initializeThemeToggle() {
+        console.log('🎨 Navigation: Setting up theme toggle...');
+        
+        // Apply saved theme immediately when navigation loads
+        this.applySavedTheme();
+        
+        // Simple direct approach - just set up the click handler
+        const themeToggle = document.getElementById('themeToggle');
+        if (!themeToggle) {
+            console.warn('🎨 Navigation: Theme toggle button not found');
+            return;
+        }
+
+        console.log('🎨 Navigation: Theme toggle button found');
+
+        // Remove any existing listeners
+        const newThemeToggle = themeToggle.cloneNode(true);
+        themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+
+        // Set up click handler with fallback logic
+        newThemeToggle.addEventListener('click', () => {
+            console.log('🎨 Navigation: Theme toggle clicked');
+            
+            if (window.themeManager && typeof window.themeManager.toggleTheme === 'function') {
+                console.log('🎨 Navigation: Using ThemeManager.toggleTheme()');
+                window.themeManager.toggleTheme();
+            } else {
+                console.log('🎨 Navigation: ThemeManager not available, using manual toggle');
+                this.manualThemeToggle();
+            }
+        });
+
+        console.log('🎨 Navigation: Theme toggle click handler attached');
+    }
+
+    static applySavedTheme() {
+        // Get saved theme or detect system preference
+        const savedTheme = this.getSavedTheme();
+        const systemTheme = this.getSystemTheme();
+        const themeToApply = savedTheme || systemTheme;
+        
+        console.log(`🎨 Navigation: Applying theme "${themeToApply}" (saved: ${savedTheme}, system: ${systemTheme})`);
+        
+        const root = document.documentElement;
+        if (themeToApply === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+        } else {
+            root.removeAttribute('data-theme');
+        }
+    }
+
+    static getSavedTheme() {
+        try {
+            return localStorage.getItem('theme');
+        } catch (e) {
+            console.warn('🎨 Navigation: localStorage not available');
+            return null;
+        }
+    }
+
+    static getSystemTheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+        return 'light';
+    }
+
+    static manualThemeToggle() {
+        // Get current theme state
+        const root = document.documentElement;
+        const currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        console.log(`🎨 Navigation: Manual toggle from "${currentTheme}" to "${newTheme}"`);
+        
+        // Apply new theme
+        if (newTheme === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+        } else {
+            root.removeAttribute('data-theme');
+        }
+
+        // Save preference (remove if it matches system preference)
+        const systemTheme = this.getSystemTheme();
+        try {
+            if (newTheme === systemTheme) {
+                // If new theme matches system preference, remove stored preference
+                localStorage.removeItem('theme');
+                console.log(`🎨 Navigation: Removed stored theme (matches system: ${systemTheme})`);
+            } else {
+                // Store explicit preference
+                localStorage.setItem('theme', newTheme);
+                console.log(`🎨 Navigation: Saved theme preference: ${newTheme}`);
+            }
+        } catch (e) {
+            console.warn('🎨 Navigation: Could not save theme preference to localStorage');
+        }
+
+        // Add visual feedback
+        this.addToggleAnimation();
+    }
+
+    static addToggleAnimation() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 150);
+        }
     }
 
     static initializeDropdowns() {

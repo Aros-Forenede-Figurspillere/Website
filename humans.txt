@@ -4,7 +4,7 @@
 
 Organization: Aros Forenede Figurspillere
 Location: Aarhus, Denmark
-Contact: info@arosff.dk
+Contact: arosforenedefigurspillere@gmail.com
 Facebook: https://www.facebook.com/arosforenedefigurspillere
 
 /* SITE */

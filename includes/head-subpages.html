@@ -2,6 +2,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Immediate theme application to prevent flash -->
+<script>
+(function() {
+    try {
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const themeToApply = savedTheme || systemTheme;
+        
+        if (themeToApply === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    } catch (e) {
+        // Fail silently if localStorage not available
+    }
+})();
+</script>
+
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="../favicon.ico">
 <link rel="shortcut icon" href="../favicon.ico">

@@ -18,6 +18,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding-top: 77px; /* Match exact navbar height */
         }
 
         /* Main Content */
@@ -250,6 +251,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding-top: 77px; /* Match exact navbar height for mobile */
+            }
+            
             .game-container {
                 padding: 2rem;
                 margin: 1rem;

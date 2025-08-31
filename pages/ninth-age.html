@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 9th Age: Fantasy Battles | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Oplev The 9th Age: Fantasy Battles - det community-drevne fantasy miniature wargame. 16 unikke fraktioner, strategisk kamp og episke slag i en rig fantasy verden.">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* The 9th Age specific styles - using existing CSS variables from main stylesheet */
+        
+        .ninth-age-hero {
+            background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(25, 25, 112, 0.7)), 
+                        url('../assets/images/9thAge/Empire of Sonnstahl.jpg') center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-family: 'Cinzel', serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            margin-bottom: 1.5rem;
+            color: #FFD700;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            margin-bottom: 2rem !important;
+            color: #FFD700;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0.9;
+        }
+        
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .hero-buttons .btn {
+            min-width: 200px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        /* Responsive grid for factions */
+        @media (max-width: 1200px) {
+            .faction-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .faction-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--border-accent);
+            position: relative;
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .faction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .faction-card:hover .faction-image {
+            transform: scale(1.05);
+        }
+        
+        .faction-content {
+            padding: 1.5rem;
+        }
+        
+        .faction-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-alignment {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .alignment-order {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+        
+        .alignment-neutral {
+            background: linear-gradient(45deg, #808080, #A0A0A0);
+            color: #000;
+        }
+        
+        .alignment-evil {
+            background: linear-gradient(45deg, #8B0000, #FF0000);
+            color: #FFF;
+        }
+        
+        .lore-section {
+            background: var(--bg-tertiary);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-accent);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .community-section {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            display: block;
+        }
+        
+        .getting-started {
+            background: var(--bg-tertiary);
+            padding: 4rem 0;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        /* Responsive grid for steps */
+        @media (max-width: 1200px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .step-card {
+            background: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--border-accent);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+            align-items: center;
+        }
+        
+        .step-card h3 {
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            color: var(--color-primary);
+        }
+        
+        .step-card p {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Enhanced Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--color-primary), #c0392b);
+            color: white;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #c0392b, var(--color-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--color-secondary), #34495e);
+            color: white;
+            border-color: var(--color-secondary);
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #34495e, var(--color-secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .ninth-age-hero {
+                min-height: 70vh;
+                padding: 1rem 0.5rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-buttons .btn {
+                min-width: 250px;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .feature-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation loaded dynamically -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="ninth-age-hero">
+        <div class="hero-content">
+            <h1>The 9th Age: Fantasy Battles</h1>
+            <p class="hero-subtitle">Et community-drevet fantasy miniature wargame</p>
+            <p>
+                Oplev det ultimative fantasy wargame skabt af spillere for spillere. 
+                16 unikke fraktioner, strategisk dybde og uendelige muligheder for customization.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://www.the-ninth-age.com/?lang=en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> Officiel Hjemmeside
+                </a>
+                <a href="https://discord.gg/5yvQRbd5QK" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i class="fab fa-discord"></i> Tilslut dig os
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <h2 class="section-title">Hvad er The 9th Age?</h2>
+        <div class="about-content">
+            <p>
+                <strong>The 9th Age: Fantasy Battles</strong> er et gratis fantasy tabletop miniature wargame, der er udviklet og vedligeholdt af hundredvis af passionerede spillere fra hele verden. Det er designet til at være tilgængeligt for alle - fra casual spillere til turneringskrigere.
+            </p>
+            <p>
+                Spillet tilbyder ubegrænset customization af hære repræsenteret af modeller fra enhver producent, samt evnen til at spille sjove spil, der ikke afgøres af et enkelt terningkast. Turneringsspillere vil sætte pris på de præcise regler og den exceptionelle balance.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container">
+        <h2 class="section-title">Hvorfor The 9th Age?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🆓</div>
+                <h3>Helt Gratis</h3>
+                <p>Alle regler og army books er frit tilgængelige. Ingen skjulte omkostninger eller abonnementer.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚖️</div>
+                <h3>Perfekt Balance</h3>
+                <p>Community-drevet udvikling sikrer, at alle fraktioner er kompetitive og sjove at spille.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Ubegrænset Customization</h3>
+                <p>Brug modeller fra enhver producent. Din kreativitet er den eneste begrænsning.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Community</h3>
+                <p>Deltag i en verdensomspændende community af dedikerede spillere og udviklere.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Factions Section -->
+    <section class="container">
+        <h2 class="section-title">De 16 Fraktioner</h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+            Hver fraktion tilbyder sin egen unikke oplevelse med enheder og spillestile baseret på rig baggrundslore.
+        </p>
+        
+        <div class="faction-grid">
+            <!-- Beast Herds -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/beastHerd.jpg" alt="Beast Herds" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Chaos</span>
+                    <h3>Beast Herds</h3>
+                    <p>Vilde og primitive væsener fra skovens dybder. Hurtige angreb og rå styrke karakteriserer denne fraktion.</p>
+                </div>
+            </div>
+
+            <!-- Daemon Legions -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/demonLegions.jpg" alt="Daemon Legions" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Chaos</span>
+                    <h3>Daemon Legions</h3>
+                    <p>Frygtindgydende dæmoner fra de mørke dimensioner. Magisk dominans og terror på slagmarken.</p>
+                </div>
+            </div>
+
+            <!-- Dread Elves -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/DreadElves.jpg" alt="Dread Elves" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Mørke</span>
+                    <h3>Dread Elves</h3>
+                    <p>Ondskabsfulde elver med sofistikeret krigsførelse. Elite-enheder og brutal effektivitet.</p>
+                </div>
+            </div>
+
+            <!-- Dwarven Holds -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/DwarvenHolds.jpg" alt="Dwarven Holds" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-order">Orden</span>
+                    <h3>Dwarven Holds</h3>
+                    <p>Stolte dværge med urokkelig forsvar. Tung rustning, kraftfulde krigsmaskiner og ære.</p>
+                </div>
+            </div>
+
+            <!-- Empire of Sonnstahl -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Empire of Sonnstahl.jpg" alt="Empire of Sonnstahl" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-order">Orden</span>
+                    <h3>Empire of Sonnstahl</h3>
+                    <p>Menneskeligt imperium med disciplinerede tropper. Alsidighed og taktisk fleksibilitet.</p>
+                </div>
+            </div>
+
+            <!-- Highborn Elves -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Highborn Elves.jpg" alt="Highborn Elves" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-order">Orden</span>
+                    <h3>Highborn Elves</h3>
+                    <p>Ædle og majestætiske elver. Magisk kunnen og elegant krigsførelse i perfekt harmoni.</p>
+                </div>
+            </div>
+
+            <!-- Infernal Dwarves -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Infernal Dwarves.jpg" alt="Infernal Dwarves" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Ild</span>
+                    <h3>Infernal Dwarves</h3>
+                    <p>Korrupte dværge med ildmagi og dæmoniske maskiner. Industri møder mørk magi.</p>
+                </div>
+            </div>
+
+            <!-- Kingdom of Equitaine -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Kingdom of Equitaine.jpg" alt="Kingdom of Equitaine" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-order">Orden</span>
+                    <h3>Kingdom of Equitaine</h3>
+                    <p>Riddere med ære og chivalry. Kraftfulde kavalleri-angreb og heltemod.</p>
+                </div>
+            </div>
+
+            <!-- Ogre Khans -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Ogre Khans.jpg" alt="Ogre Khans" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-neutral">Neutral</span>
+                    <h3>Ogre Khans</h3>
+                    <p>Massive ogrer med ubændig styrke. Rå kraft og nomadisk krigsførelse.</p>
+                </div>
+            </div>
+
+            <!-- Orcs and Goblins -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Orcs and Goblins.jpg" alt="Orcs and Goblins" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Destruktion</span>
+                    <h3>Orcs and Goblins</h3>
+                    <p>Talrige og vilde grønhuder. Kaotiske angreb og upålidelig, men overraskende krigsførelse.</p>
+                </div>
+            </div>
+
+            <!-- Saurian Ancients -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Saurian Ancients.jpg" alt="Saurian Ancients" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-order">Orden</span>
+                    <h3>Saurian Ancients</h3>
+                    <p>Gamle echsemænd med mystisk visdom. Potente monstre og kosmisk magi.</p>
+                </div>
+            </div>
+
+            <!-- Sylvan Elves -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Sylvan Elves.png" alt="Sylvan Elves" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-neutral">Natur</span>
+                    <h3>Sylvan Elves</h3>
+                    <p>Skovens vogtere med naturlig magi. Hurtige enheder og skovens beskyttelse.</p>
+                </div>
+            </div>
+
+            <!-- Undying Dynasties -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Undying Dynasties.jpg" alt="Undying Dynasties" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Død</span>
+                    <h3>Undying Dynasties</h3>
+                    <p>Ældgamle mumier og udødelige krigere. Nekromanti og ørkens uendelige legioner.</p>
+                </div>
+            </div>
+
+            <!-- Vampire Covenant -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Vampire Covenant.jpg" alt="Vampire Covenant" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Død</span>
+                    <h3>Vampire Covenant</h3>
+                    <p>Aristokratiske vampyrer og deres døde tjenere. Elegante udødelige med blodtørst.</p>
+                </div>
+            </div>
+
+            <!-- Vermin Swarm -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Vermin Swarm.jpg" alt="Vermin Swarm" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Korruption</span>
+                    <h3>Vermin Swarm</h3>
+                    <p>Talrige rotteracer fra undergrunden. Sværme af enheder og tvisom teknologi.</p>
+                </div>
+            </div>
+
+            <!-- Warriors of the Dark Gods -->
+            <div class="faction-card">
+                <img src="../assets/images/9thAge/Warriors of the Dark Gods.jpg" alt="Warriors of the Dark Gods" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alignment alignment-evil">Chaos</span>
+                    <h3>Warriors of the Dark Gods</h3>
+                    <p>Elite chaos-krigere med mørk velsignelse. Tunge pansrede enheder og gudernes gunst.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="container">
+            <h2 class="section-title">Et Community-Drevet Projekt</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                The 9th Age udvikles og vedligeholdes af passionerede spillere fra hele verden
+            </p>
+            
+            <div class="community-stats">
+                <div class="stat-card">
+                    <span class="stat-number">16</span>
+                    <h4>Fraktioner</h4>
+                    <p>Hver med unik spillestil</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <h4>Gratis</h4>
+                    <p>Alle regler og army books</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3rd</span>
+                    <h4>Edition</h4>
+                    <p>Kontinuerlig udvikling</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">∞</span>
+                    <h4>Modeller</h4>
+                    <p>Fra enhver producent</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem;">
+                Som et community-drevet projekt er The 9th Age åbent for dig! Tilslut dig os og gør det til dit projekt også!
+            </p>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started">
+        <div class="container">
+            <h2 class="section-title">Kom i Gang med The 9th Age</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Download Reglerne</h3>
+                    <p>Start med "Essence of War" quickstarter regelbogen. Helt gratis og perfekt til begyndere!</p>
+                    <a href="https://www.the-ninth-age.com/how-to-play/quick-play/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        Download Quickstarter
+                    </a>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Vælg Din Fraktion</h3>
+                    <p>Udforsk de 16 fraktioner og find den spillestil, der passer perfekt til dig.</p>
+                    <a href="https://www.the-ninth-age.com/factions/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        Se Fraktioner
+                    </a>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Byg Din Hær</h3>
+                    <p>Brug modeller fra enhver producent til at skabe din helt unikke hær og stil.</p>
+                    <a href="https://www.the-ninth-age.com/army-builder/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        Army Builder
+                    </a>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Tilslut dig Aros FF</h3>
+                    <p>Kom til vores spilleaftener og mød andre The 9th Age entusiaster!</p>
+                    <a href="../index.html#kontakt" class="btn btn-primary">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <h2 class="section-title">Ressourcer</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Officielle Regler</h3>
+                <p>Download den komplette regelbog og alle army books gratis.</p>
+                <a href="https://www.the-ninth-age.com/download/fantasy-battles/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    Download Regler
+                </a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Community Forum</h3>
+                <p>Deltag i diskussioner om regler, taktik og lore på det officielle forum.</p>
+                <a href="https://community.the-ninth-age.com/wcf/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    Besøg Forum
+                </a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>The Ninth Scroll</h3>
+                <p>Læs det officielle magasin med artikler, battle reports og painting guides.</p>
+                <a href="https://www.the-ninth-age.com/the-9th-scroll/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    Læs Magasinet
+                </a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Army Builder</h3>
+                <p>Planlæg din hær med officielle army builder værktøjer.</p>
+                <a href="https://www.the-ninth-age.com/army-builder/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    Byg Hær
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Component loader and scripts -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
+</body>
+</html>

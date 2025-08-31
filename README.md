@@ -324,7 +324,7 @@ python -m http.server 8000
 ## 📞 Support & Contact
 
 - **Technical Issues**: Use the contact form on the website
-- **Community Info**: info@arosff.dk
+- **Community Info**: arosforenedefigurspillere@gmail.com
 - **Meeting Times**: Sundays 13:00-18:00
 - **Location**: Aarhus, Denmark
 
