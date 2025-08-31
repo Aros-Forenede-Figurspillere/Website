@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer Age of Sigmar | Aros Forenede Figurspillere</title>
+    <meta name="description" content="Oplev Warhammer Age of Sigmar - episke kampe i de magiske Mortal Realms. Vælg din fraktion og kæmp for herredømmet i denne fantasy verden fuld af guder, helte og monstre.">
+    
+    <!-- Common head elements loaded dynamically -->
+    <div id="head-container"></div>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Age of Sigmar specific styles - using existing CSS variables from main stylesheet */
+        
+        .aos-hero {
+            background: linear-gradient(rgba(0, 32, 96, 0.8), rgba(75, 0, 130, 0.8)), 
+                        url('../assets/images/warhammer aos/hero.jpg') center/cover;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-family: 'Cinzel', serif;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9);
+            margin-bottom: 1.5rem;
+            color: #FFD700;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            margin-bottom: 2rem !important;
+            color: #87CEEB;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+            opacity: 0.9;
+        }
+        
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .hero-buttons .btn {
+            min-width: 200px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--border-accent);
+            position: relative;
+        }
+        
+        .faction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .faction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .faction-card:hover .faction-image {
+            transform: scale(1.05);
+        }
+        
+        .faction-content {
+            padding: 1.5rem;
+        }
+        
+        .faction-content h3 {
+            color: var(--color-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faction-alliance {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .alliance-order {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1a1a1a;
+        }
+        
+        .alliance-chaos {
+            background: linear-gradient(45deg, #8B0000, #FF0000);
+            color: white;
+        }
+        
+        .alliance-death {
+            background: linear-gradient(45deg, #2F4F4F, #708090);
+            color: white;
+        }
+        
+        .alliance-destruction {
+            background: linear-gradient(45deg, #228B22, #32CD32);
+            color: white;
+        }
+        
+        .lore-section {
+            background: var(--bg-tertiary);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-accent);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .community-section {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            display: block;
+        }
+        
+        .getting-started {
+            background: var(--bg-tertiary);
+            padding: 4rem 0;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        /* Responsive grid for steps */
+        @media (max-width: 1200px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .step-card {
+            background: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--border-accent);
+        }
+        
+        .step-number {
+            background: var(--color-primary);
+            color: white;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Enhanced Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--color-primary), #c0392b);
+            color: white;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #c0392b, var(--color-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--color-secondary), #34495e);
+            color: white;
+            border-color: var(--color-secondary);
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #34495e, var(--color-secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .aos-hero {
+                min-height: 70vh;
+                padding: 1rem 0.5rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-buttons .btn {
+                min-width: 250px;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .feature-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation loaded dynamically -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="aos-hero">
+        <div class="hero-content">
+            <h1>Warhammer Age of Sigmar</h1>
+            <p class="hero-subtitle">Velkommen til de Dødelige Riger</p>
+            <p>
+                Oplev en verden hvor helte, guder og monstre kæmper om herredømmet på tværs af vidtstrakte magiske domæner 
+                beboet af utallige arter og folk. Dette er Sigmar-æraen!
+            </p>
+            <div class="hero-buttons">
+                <a href="https://ageofsigmar.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> Officiel Hjemmeside
+                </a>
+                <a href="https://discord.gg/5yvQRbd5QK" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <i class="fab fa-discord"></i> Tilslut dig os
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <h2 class="section-title">Hvad er Warhammer Age of Sigmar?</h2>
+        <div class="about-content">
+            <p>
+                <strong>Warhammer Age of Sigmar</strong> er Games Workshops flagskibsspil inden for fantasy tabletop wargaming. 
+                Spillet foregår i de Dødelige Riger (Mortal Realms), et kosmos af vidtstrakte magiske domæner hvor fantasy 
+                møder high fantasy i episke proportioner.
+            </p>
+            <p>
+                Med fem nøgler til Warhammer-hobbyen – Samling, Bygning, Malning, Spil og Læsning – er der masser af måder 
+                at nyde Age of Sigmar på. Spillet kombinerer utrolig detaljerede miniatures med dybdegående strategisk 
+                gameplay og en rig baggrundsunivers fyldt med guder, helte og legendariske slag.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container">
+        <h2 class="section-title">Hvorfor Age of Sigmar?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Episke Slag</h3>
+                <p>Kæmp i massive slag med hundredvis af krigere på tværs af magiske slagmarker.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Utrolige Miniatures</h3>
+                <p>Samle og mal nogle af de mest detaljerede fantasy miniatures nogensinde skabt.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Rig Baggrundshistorie</h3>
+                <p>Udforsk en dyb og sammenhængende fantasy-verden fyldt med intriger og konflikter.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌟</div>
+                <h3>Tilgængelighed</h3>
+                <p>Fra begynder-venlige starter sets til komplekse turneringsformater.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Factions Section -->
+    <section class="container">
+        <h2 class="section-title">De Fire Store Alliancer</h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+            Vælg din side i konflikten om de Dødelige Riger. Hver alliance tilbyder unikke spillestile og fraktioner.
+        </p>
+        
+        <div class="faction-grid">
+            <!-- Order Factions -->
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Lord-Vigilant on Gryph-stalker.png" alt="Stormcast Eternals" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-order">Order</span>
+                    <h3>Stormcast Eternals</h3>
+                    <p>Sigmars udvalgte krigere, genfødt som udødelige champions. Nedstyrtende fra himlene i lynstråler.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Freeguild Steelhelms.png" alt="Cities of Sigmar" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-order">Order</span>
+                    <h3>Cities of Sigmar</h3>
+                    <p>Civilisationens sidste bastioner. Modige dødelige soldater som forsvarer de frie byer.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Vanari Auralan Wardens.png" alt="Lumineth Realm-lords" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-order">Order</span>
+                    <h3>Lumineth Realm-lords</h3>
+                    <p>Lysrigets krigerfilosoffer. Perfektionister der kæmper for oplysning og balance.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Alarielle the Everqueen.png" alt="Sylvaneth" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-order">Order</span>
+                    <h3>Sylvaneth</h3>
+                    <p>Livsrigets trævogtere. Mystiske skovånd der beskytter naturens orden.</p>
+                </div>
+            </div>
+
+            <!-- Chaos Factions -->
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Bloodcrushers.png" alt="Khorne Bloodbound" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-chaos">Chaos</span>
+                    <h3>Khorne Bloodbound</h3>
+                    <p>Blodgudens rasende tilbedere. Brutal nærkamp og hæmningsløs aggression.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Kairos Fateweaver.png" alt="Tzeentch Arcanites" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-chaos">Chaos</span>
+                    <h3>Tzeentch Arcanites</h3>
+                    <p>Forandringsgudens magikere. Manipulation, magi og evigt skiftende planer.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Putrid Blightkings.png" alt="Nurgle Rotbringers" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-chaos">Chaos</span>
+                    <h3>Nurgle Rotbringers</h3>
+                    <p>Forfaldsgudens forkyndere. Sygdom, råddenskab og pervers livsglæde.</p>
+                </div>
+            </div>
+
+            <!-- Death Factions -->
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Nagash, Supreme Lord of the Undead.png" alt="Ossiarch Bonereapers" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-death">Death</span>
+                    <h3>Ossiarch Bonereapers</h3>
+                    <p>Nagashs perfekte dødslegioner. Disciplinerede krigere skabt af ben og vil.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Myrmourn Banshees.png" alt="Nighthaunt" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-death">Death</span>
+                    <h3>Nighthaunt</h3>
+                    <p>Fortabte sjæle og hævngerriger spøgelser. Terror og åndelig tortur.</p>
+                </div>
+            </div>
+
+            <!-- Destruction Factions -->
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Kragnos, the End of Empires.png" alt="Orruk Warclans" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-destruction">Destruction</span>
+                    <h3>Orruk Warclans</h3>
+                    <p>Brutale grønhuder der lever for krig. Rå styrke og primitiv vildskab.</p>
+                </div>
+            </div>
+
+            <div class="faction-card">
+                <img src="../assets/images/warhammer aos/Mournfang Pack.png" alt="Ogor Mawtribes" class="faction-image">
+                <div class="faction-content">
+                    <span class="faction-alliance alliance-destruction">Destruction</span>
+                    <h3>Ogor Mawtribes</h3>
+                    <p>Sultne nomadiske kæmper. Evig jagt efter mad og de største slagmarker.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mortal Realms Section -->
+    <section class="lore-section">
+        <div class="container">
+            <h2 class="section-title">De Dødelige Riger</h2>
+            <div class="about-content">
+                <p>
+                    De Dødelige Riger er et multivers af otte sammenkoblede verdener, hver styret af magisk energi og unikke love. 
+                    Fra Azyr (Himlene) hvor Sigmar regerer, til Shyish (Dødsriget) hvor Nagash hersker, tilbyder hver rige 
+                    unikke slagmarker og udfordringer.
+                </p>
+                <p>
+                    Disse riger er forbundet gennem magiske portaler kaldet Realmgates, som tillader hære at rejse mellem 
+                    verdener og skabe episke konflikter på tværs af hele kosmos. Her udkæmpes kampe om sjæle, magt og selve 
+                    realitetens natur.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started">
+        <div class="container">
+            <h2 class="section-title">Kom i Gang</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+                Fra din første miniature til store slag - sådan starter du din Age of Sigmar rejse.
+            </p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Vælg din Alliance</h3>
+                    <p>Bestem dig for Order, Chaos, Death eller Destruction baseret på din spillestil.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Start med Starter Set</h3>
+                    <p>Køb et begynder-venligt starter set med alt hvad du behøver for at spille.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Byg og Mal</h3>
+                    <p>Saml dine miniatures og mal dem i dine foretrukne farver og designs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Spil Spillet</h3>
+                    <p>Lær reglerne og begynd at spille mod andre spillere i klubben.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="container">
+            <h2 class="section-title">Kom i Kontakt med Aros Forenede Figurspillere</h2>
+            <p style="margin-bottom: 3rem; font-size: 1.1rem;">
+                Interesseret i Age of Sigmar? Vi spiller regelmæssigt og byder nye spillere velkommen
+            </p>
+            
+            <div class="community-stats">
+                <div class="stat-card">
+                    <div class="feature-icon">💬</div>
+                    <h4>Discord</h4>
+                    <p>Chat med andre spillere og få svar på spørgsmål</p>
+                </div>
+                <div class="stat-card">
+                    <div class="feature-icon">📅</div>
+                    <h4>Events & Spilleaftener</h4>
+                    <p>Se hvornår vi mødes og deltag i spil</p>
+                </div>
+                <div class="stat-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Begyndervenlig</h4>
+                    <p>Vi hjælper gerne nye spillere i gang</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <a href="https://discord.gg/5yvQRbd5QK" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-right: 1rem;">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+                <a href="https://www.facebook.com/arosforenedefigurspillere" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-right: 1rem;">
+                    <i class="fab fa-facebook"></i> Facebook Gruppe
+                </a>
+                <a href="../index.html#kontakt" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Kontakt Info
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Component loader and scripts -->
+    <script src="../assets/js/navigation.js"></script>
+    <div id="scripts-container"></div>
+</body>
+</html>

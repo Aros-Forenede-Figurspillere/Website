@@ -637,8 +637,8 @@
             
             <div class="intro-grid">
                 <div class="intro-text">
-                    <h3>Månedlige Spilaftener</h3>
-                    <p>Vi holder regelmæssige Moonstone spilaftener, hvor både nye og erfarne spillere er velkomne. Her kan du lære spillet, prøve forskellige fraktioner og deltage i venskabelige kampe.</p>
+                    <h3>Moonstone Spilaftener</h3>
+                    <p>Vi spiller Moonstone i foreningen, hvor både nye og erfarne spillere er velkomne. Her kan du lære spillet, prøve forskellige fraktioner og deltage i venskabelige kampe.</p>
                     
                     <p><strong>Hvad vi tilbyder:</strong></p>
                     <ul class="starter-features">
@@ -667,41 +667,7 @@
     <!-- Scripts loaded dynamically -->
     <div id="scripts-container"></div>
 
-    <script>
-        // Load common components
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load head elements
-            fetch('../includes/head-subpages.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('head-container').innerHTML = data;
-                });
-
-            // Load navigation
-            fetch('../includes/navigation-subpages.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navigation-container').innerHTML = data;
-                    // Initialize navigation after loading
-                    if (typeof initializeNavigation === 'function') {
-                        initializeNavigation();
-                    }
-                });
-
-            // Load footer
-            fetch('../includes/footer-subpages.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-container').innerHTML = data;
-                });
-
-            // Load scripts
-            fetch('../includes/scripts-subpages.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('scripts-container').innerHTML = data;
-                });
-        });
-    </script>
+    <!-- Component loader and scripts -->
+    <script src="../assets/js/navigation.js"></script>
 </body>
 </html>
