@@ -59,9 +59,6 @@ class ComponentLoader {
             case 'subpages':
                 footerFile = '../includes/footer-subpages.html';
                 break;
-            case 'simple':
-                footerFile = '../includes/footer-simple.html';
-                break;
             default:
                 footerFile = 'includes/footer-main.html';
         }
@@ -312,9 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let footerType = 'main';
         if (isSubpage) {
             footerType = 'subpages';
-        }
-        if (window.location.pathname.includes('dice-game')) {
-            footerType = 'simple';
         }
         ComponentLoader.loadFooter('footer-container', footerType);
     }

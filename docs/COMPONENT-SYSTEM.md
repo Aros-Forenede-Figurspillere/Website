@@ -34,8 +34,7 @@ includes/
 ├── navigation.html           # Main site navigation
 ├── navigation-subpages.html  # Subpage navigation with back links
 ├── footer-main.html          # Full footer with all information
-├── footer-simple.html        # Minimal footer for special pages
-├── footer-subpages.html      # Subpage footer variant
+├── footer-subpages.html      # Subpage footer with game links
 ├── scripts-main.html         # Main JavaScript includes
 └── scripts-subpages.html     # Subpage JavaScript includes
 ```
@@ -112,17 +111,11 @@ ComponentLoader.loadHead('head-container', true);
 - Copyright information
 - Site credits
 
-#### `footer-simple.html`
-**Purpose**: Minimal footer for special pages (like dice game)
-**Contains**:
-- Essential links only
-- Minimal styling
-- Reduced visual weight
-
 #### `footer-subpages.html`
-**Purpose**: Footer for subpages with adjusted paths
+**Purpose**: Footer for subpages with adjusted paths and game links
 **Contains**:
 - All main footer content
+- "Spil Vi Spiller" section with links to game pages
 - Relative paths corrected for subpage location
 
 ### Script Components
@@ -247,7 +240,7 @@ static async loadComponent(containerId, componentPath, fallbackHandler = null) {
 ### Custom Component Loading
 ```javascript
 // Load specific footer type
-ComponentLoader.loadFooter('footer-container', 'simple');
+ComponentLoader.loadFooter('footer-container', 'subpages');
 
 // Load with custom fallback
 ComponentLoader.loadComponent(

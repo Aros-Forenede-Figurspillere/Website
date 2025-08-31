@@ -99,7 +99,6 @@ We foster a welcoming environment where both newcomers and veterans can:
 │   ├── navigation.html       # Main navigation
 │   ├── navigation-subpages.html # Subpage navigation
 │   ├── footer-main.html      # Main footer
-│   ├── footer-simple.html    # Simple footer
 │   ├── footer-subpages.html  # Subpage footer
 │   ├── scripts-main.html     # Main scripts
 │   └── scripts-subpages.html # Subpage scripts
@@ -196,7 +195,7 @@ The website uses a modular component system for maintainability:
 - `head-common.html` - Common head elements (CSS, fonts, meta)
 - `head-subpages.html` - Subpage-specific head elements
 - `footer-main.html` - Main footer with full information
-- `footer-simple.html` - Minimal footer for special pages
+- `footer-subpages.html` - Subpage footer with game links
 - `scripts-main.html` - Main JavaScript includes
 - `scripts-subpages.html` - Subpage JavaScript includes
 
