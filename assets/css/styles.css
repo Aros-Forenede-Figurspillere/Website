@@ -1339,7 +1339,8 @@ h1, h2, h3, h4, h5, h6 {
     
     .nav-dropdown.active .dropdown-menu {
         opacity: 1;
-        max-height: 300px;
+        max-height: 500px; /* Increased from 300px to accommodate more items */
+        overflow-y: auto; /* Allow scrolling if needed */
         padding: 0.5rem 0;
     }
     
